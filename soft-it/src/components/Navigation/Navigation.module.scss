@@ -1,0 +1,56 @@
+.nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  background-image: url('../../assets/images/Background.png');
+  background-size: cover;
+
+  .content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+  }
+
+  .group,
+  .list {
+    display: flex;
+    align-items: center;
+  }
+
+  .list {
+    column-gap: 3rem;
+  }
+
+  .logo {
+    width: 15rem;
+    height: auto;
+  }
+
+  .item,
+  .phone {
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: color .3s ease-out;
+
+    &:hover,
+    &:focus {
+      color: #fff;
+    }
+  }
+
+  .phone {
+    color: var(--color-grey-light);
+    margin: 0 5.5rem;
+  }
+
+  .language {
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+  }
+}

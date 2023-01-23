@@ -1,0 +1,31 @@
+.text {
+  font-size: 1.4rem;
+  color: var(--color-pale-light);
+
+  &--sub {
+    color: var(--color-grey-light);
+  }
+
+  &--highlight {
+    color: #fff;
+  }
+
+  &--lg {
+    font-size: 2rem;
+  }
+
+  &--upc {
+    text-transform: uppercase;
+  }
+}
+
+.heading {
+
+  &--1 {
+    font-size: 3rem;
+  }
+
+  &--xlg {
+    font-size: 20rem;
+  }
+}
