@@ -65,7 +65,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
         { [classes.active]: open }
       )}
     >
-      <div className="btn btn--primary" onClick={() => setOpen(p => !p)}>
+      <div className="btn btn--outline" onClick={() => setOpen(p => !p)}>
         {label}
       </div>
       <div className={classes.list}>

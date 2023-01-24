@@ -8,7 +8,7 @@ interface FontProviderProps {
 const interFont = Inter({
   subsets: ['latin'],
   style: ['normal'],
-  weight: ['400', '500', '600', '700']
+  weight: ['400', '500', '600', '700', '800']
 });
 
 const FontProvider: FC<FontProviderProps> = ({ children }) => {

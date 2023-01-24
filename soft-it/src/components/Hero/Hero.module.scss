@@ -5,20 +5,40 @@
   align-items: flex-end;
   position: relative;
   background: url('../../assets/images/Background.png');
+  overflow: hidden;
 
   .moonImage {
     position: absolute;
-    top: 0%;
+    top: 60%;
     left: 50%;
-    transform: translate(-50%, -20%);
+    transform: translate(-50%, -60%);
     z-index: 1;
     pointer-events: none;
 
-    svg {
-      width: 120vw;
-      height: auto;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      width: 98%;
+      height: 98%;
+      box-shadow: 0 0 7rem rgba(#fff, .3);
+      border-radius: 50%;
+      backface-visibility: hidden;
+    }
+
+    img {
+      width: 25vw;
+      height: 25vw;
       transform-origin: center;
-      // animation: rotate 2s linear infinite;
+      animation: rotate 10s linear infinite 2s;
+      backface-visibility: hidden;
+    }
+
+    &.loaded {
+      animation: transformUp 2s ease;
     }
   }
 
@@ -45,5 +65,10 @@
 }
 
 @keyframes rotate {
-  to { transform: rotate(1turn); }
+  to { transform: rotate(-1turn); }
+}
+
+@keyframes transformUp {
+  from { transform: translate(-50%, 10%); }
+  to { transform: translate(-50%, -60%); }
 }
