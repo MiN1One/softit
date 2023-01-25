@@ -1,0 +1,12 @@
+.partners {
+
+  .card {
+    border-radius: 1rem;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}

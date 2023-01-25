@@ -9,9 +9,9 @@
 
   .moonImage {
     position: absolute;
-    top: 60%;
+    top: 65%;
     left: 50%;
-    transform: translate(-50%, -60%);
+    transform: translate(-50%, -65%);
     z-index: 1;
     pointer-events: none;
 
@@ -70,5 +70,5 @@
 
 @keyframes transformUp {
   from { transform: translate(-50%, 10%); }
-  to { transform: translate(-50%, -60%); }
+  to { transform: translate(-50%, -65%); }
 }

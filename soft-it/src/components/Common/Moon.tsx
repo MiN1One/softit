@@ -8,10 +8,11 @@ interface MoonProps extends
   > {
     onLoad?: () => void;
     onLoadStart?: () => void;
+    spin?: boolean;
   }
 
 const Moon: FC<MoonProps> = (props) => {
-  const { onLoad, onLoadStart, ...restProps } = props;
+  const { onLoad, onLoadStart, spin, ...restProps } = props;
 
   useEffect(() => {
     if (typeof onLoadStart === 'function') {

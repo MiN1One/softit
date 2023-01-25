@@ -1,7 +1,7 @@
 section {
   .heading,
   .heading + .text {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
   }
 
   &:not(:last-child) {
@@ -61,6 +61,7 @@ section {
 
   &--arrow {
     svg {
+      transform-origin: center;
       transition: transform .3s ease;
     }
 
@@ -95,5 +96,49 @@ section {
 
   *:not(:last-child) {
     margin-right: 1.5rem;
+  }
+}
+
+.spin {
+
+}
+
+.input-group {
+
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  &__input-wrapper {
+    display: flex;
+    background: var(--color-dark);
+    align-items: center;
+    font-size: 1.4rem;
+    position: relative;
+    
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 1.5rem;
+      transform: translateY(-50%);
+      width: 1.8rem;
+      height: 1.8rem;
+      margin-right: 1.5rem;
+    }
+  }
+  
+  &__input {
+    min-width: 40rem;
+    max-width: 100%;
+    padding: 1.5rem;
+    color: #fff;
+    padding-left: 4.5rem;
+    border: 1px solid rgba(#fff, .2);
+    border-radius: .75rem;
+
+    &:hover,
+    &:focus {
+      border-color: var(--color-grey-light);
+    }
   }
 }

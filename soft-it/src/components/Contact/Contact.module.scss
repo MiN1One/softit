@@ -1,0 +1,63 @@
+.contact {
+
+  .content {
+    border-radius: 1.5rem;
+    overflow: hidden;
+    position: relative;
+    padding: 4.5rem 4rem;
+    background: #0D0D0D;
+
+    &::after {
+      content: "";
+      background-image: url('../../assets/images/Planet\ 2.png');
+      position: absolute;
+      background-repeat: no-repeat;
+      background-position: bottom;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+    }
+  }
+
+  .moonWrapper {
+    position: absolute;
+    top: 35%;
+    right: 10rem;
+    animation: rotate 10s linear infinite;
+    
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 99%;
+      height: 99%;
+      border-radius: 50%;
+      box-shadow: 0 0 6rem rgba(#fff, .2);
+    }
+  }
+
+  .moonImage {
+    width: 28rem;
+    height: 28rem;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    z-index: 3;
+  }
+
+  .btn {
+    margin-top: 1rem;
+  }
+}
+
+@keyframes rotate {
+  to { transform: rotate(-1turn); }
+}
