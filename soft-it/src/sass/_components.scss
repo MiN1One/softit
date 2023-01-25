@@ -1,3 +1,14 @@
+section {
+  .heading,
+  .heading + .text {
+    margin-bottom: 2.5rem;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: var(--section-vertical-spacing);
+  }
+}
+
 .container {
   margin: 0 auto;
   max-width: 110rem;
@@ -5,6 +16,7 @@
 
 .btn {
   cursor: pointer;
+  text-transform: capitalize;
   font-size: 1.6rem;
 
   &--primary,
@@ -23,6 +35,12 @@
     border-color: var(--color-pink);
     color: #fff;
     padding: .75rem 1.65rem;
+
+    &:hover,
+    &:focus {
+      background: var(--color-pink-dark);
+      border-color: var(--color-pink-dark);
+    }
   }
 
   &--outline {
@@ -30,6 +48,14 @@
     &:focus {
       background: var(--color-dark);
       border-color: #fff;
+    }
+  }
+
+  &--colored#{&}--outline {
+    &:hover,
+    &:focus {
+      border-color: #fff;
+      background: var(--color-pink-dark);
     }
   }
 
@@ -59,7 +85,7 @@
     width: 2rem;
     height: 2rem;
     fill: #fff;
-    margin-right: 1rem;
+    margin-right: .75rem;
   }
 }
 

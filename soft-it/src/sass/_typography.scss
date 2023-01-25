@@ -1,6 +1,16 @@
 .text {
   font-size: 1.4rem;
   color: var(--color-pale-light);
+  letter-spacing: 0.03em;
+  line-height: 2.6rem;
+
+  &--bold {
+    font-weight: 500;
+  }
+
+  &--light {
+    color: #fff;
+  }
 
   &--sub {
     color: var(--color-grey-light);

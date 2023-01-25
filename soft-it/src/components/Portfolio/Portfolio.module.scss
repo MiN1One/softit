@@ -1,0 +1,112 @@
+.portfolio {
+
+  .cards {
+    display: grid;
+    grid-template-columns: 35% 35% 30%;
+    grid-auto-rows: 16.5vw;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .card {
+    position: relative;
+    width: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    &:first-child {
+      grid-row: 1 / 3;
+    }
+
+    &:last-child {
+      grid-column: 2 / -1;
+    }
+
+    &:hover .cardActions {
+      transform: translate(0);
+    }
+
+    &:hover .cardContent {
+      &::before {
+        background: linear-gradient(142.32deg, rgba(209, 50, 145, 0.4) -5.76%, transparent 20%);
+      }
+  
+      &::after {
+        background: linear-gradient(300deg, rgba(209, 50, 145, 0.4) -9.32%, transparent 25%);
+      }
+    }
+  }
+
+  .cardContent {
+    background: rgba(0,0,0,.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &,
+    &::after,
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    &::after,
+    &::before {
+      transition: background .4s ease;
+    }
+  }
+
+  .cardHead {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+  }
+  
+  .cardActions {
+    transition: transform .5s ease;
+    transform: translateX(50%);
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 3rem;
+  }
+
+  .title {
+    color: #fff; 
+  }
+
+  .figure {
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .cardLink {
+    font-size: 1.8rem;
+    display: flex;
+    color: #fff;
+    align-items: center;
+
+    svg {
+      width: 3rem;
+      height: 3rem;
+      fill: #fff;
+      margin-left: .75rem;
+    }
+  }
+
+  .btn {
+    width: max-content;
+  }
+}
