@@ -3,6 +3,7 @@ import Layout from "@/components/Common/Layout";
 import CtaGroup from "@/components/CtaGroup/CtaGroup";
 import Hero from "@/components/Hero/Hero";
 import Portfolio from "@/components/Portfolio/Portfolio";
+import ServicesSection from "@/components/ServicesSection/ServicesSection";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
         <CtaGroup />
         <AboutSection />
         <Portfolio />
+        <ServicesSection />
       </Layout>
     </main>
   )
