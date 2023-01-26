@@ -9,7 +9,6 @@ const Hero: FC = () => {
   const [moonLoaded, setMoonLoaded] = useState(false);
 
   const onMoonLoad = useCallback(() => setMoonLoaded(true), []);
-  console.log({ moonLoaded })
 
   return (
     <section className={classes.hero}>

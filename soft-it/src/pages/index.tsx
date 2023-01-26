@@ -1,4 +1,5 @@
 import AboutSection from "@/components/AboutSection/AboutSection";
+import BannerHiring from "@/components/BannerHiring/BannerHiring";
 import Layout from "@/components/Common/Layout";
 import Contact from "@/components/Contact/Contact";
 import CtaGroup from "@/components/CtaGroup/CtaGroup";
@@ -18,6 +19,7 @@ export default function Home() {
         <ServicesSection />
         <PartnersSection />
         <Contact />
+        <BannerHiring />
       </Layout>
     </main>
   )

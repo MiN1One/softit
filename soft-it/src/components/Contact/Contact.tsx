@@ -45,6 +45,7 @@ const Contact: FC = () => {
               placeholder="+998"
             />
             <button
+              title="Submit the form"
               type="submit"
               onSubmit={onSubmitRequest}
               className={classNames(classes.btn, "btn btn--colored")}

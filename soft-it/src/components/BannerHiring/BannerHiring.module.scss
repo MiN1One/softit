@@ -1,0 +1,45 @@
+.banner {
+
+  .content {
+    padding: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: var(--color-dark-secondary);
+    border-radius: 1.5rem;
+  }
+
+  .heading {
+    display: flex;
+    align-items: center;
+    max-width: 40rem;
+    position: relative;
+
+    img {
+      width: 3rem;
+      height: 3rem;
+      position: absolute;
+      top: 55%;
+      right: 9.5rem;
+    }
+  }
+
+  .tags {
+    display: grid;
+    direction: rtl;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.65rem;
+  }
+
+  .tag {
+    padding: 1rem 1.5rem;
+    border-color: var(--color-grey);
+    color: var(--color-grey);
+
+    &:hover,
+    &:focus {
+      color: var(--color-pale-light);
+      border-color: var(--color-pale-light);
+    }
+  }
+}
