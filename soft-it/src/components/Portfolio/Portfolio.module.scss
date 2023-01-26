@@ -53,6 +53,8 @@
     &::after,
     &::before {
       opacity: 0;
+      pointer-events: none;
+      z-index: -1;
       transition: opacity .3s ease;
     }
 

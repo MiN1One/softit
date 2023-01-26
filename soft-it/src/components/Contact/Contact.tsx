@@ -25,7 +25,7 @@ const Contact: FC = () => {
             Do you have a project?
           </h3>
           <p className="text text--sub">
-            We have solution
+            We have a solution
           </p>
           <form className={classes.form}>
             <Input

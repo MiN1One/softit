@@ -99,6 +99,17 @@ section {
   }
 }
 
+.link {
+  font-size: 1.6rem;
+
+  &:hover,
+  &:focus {
+    color: #fff;
+
+    svg { fill: #fff; }
+  }
+}
+
 .input-group {
 
   &:not(:last-child) {
