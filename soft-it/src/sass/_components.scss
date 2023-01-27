@@ -1,6 +1,7 @@
 section {
   .heading,
-  .heading + .text {
+  .heading + .text,
+  .text + .heading {
     margin-bottom: 2rem;
   }
 
@@ -107,6 +108,33 @@ section {
     color: #fff;
 
     svg { fill: #fff; }
+  }
+}
+
+.page-section {
+  margin-top: 7.5rem;
+  padding-bottom: 15rem;
+
+  &__head {
+    padding: 10rem 0;
+    text-align: center;
+
+    h1 {
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: #fff;
+      -webkit-text-fill-color: #000;
+      color: #000;
+      font-weight: 600;
+      font-size: 5rem;
+      text-transform: uppercase;
+    }
+  }
+
+  &__body {
+
+    & > .text {
+      margin-bottom: 2rem;
+    }
   }
 }
 

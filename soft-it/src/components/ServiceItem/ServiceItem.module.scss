@@ -1,0 +1,40 @@
+.service {
+  padding: 2.5rem;
+  border-radius: 1.75rem;
+  border: 1px solid transparent;
+  position: relative;
+  transition: border-color .4s ease;
+  background: var(--color-dark-secondary);
+
+  &:hover {
+    border-color: #fff;
+    
+    .icon {
+      transform: rotate(45deg);
+    }
+  }
+  
+  .cardTitle {
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    max-width: 85%;
+  }
+  
+  .icon {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1;
+    transition: transform .4s ease;
+    transform-origin: center;
+  
+    svg {
+      width: 3.25rem;
+      height: 3.25rem;
+      fill: #fff;
+    }
+  }
+}

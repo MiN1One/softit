@@ -41,6 +41,11 @@
     &:focus {
       color: #fff;
     }
+
+    &.active {
+      color: #fff;
+      border-bottom: 1px solid rgba(#fff,.8);
+    }
   }
 
   .phone {

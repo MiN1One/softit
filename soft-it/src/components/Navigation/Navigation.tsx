@@ -1,6 +1,7 @@
 import { useGlobalContext } from "@/contexts/GlobalContext";
 import classNames from "classnames";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { FC } from "react";
 import CustomIcon from "../Common/CustomIcon";
 import Logo from "../Common/Logo";
@@ -49,12 +50,16 @@ const data = {
 
 const Navigation: FC = () => {
   const { setActiveLang } = useGlobalContext();
+  const router = useRouter();
 
   const navigationItemEls = data.navigation_items.map(item => {
     return (
       <li
         aria-label={item.label}
-        className={classes.item}
+        className={classNames(
+          classes.item,
+          { [classes.active]: router.pathname === item.url }
+        )}
         key={item.value}
       >
         <Link href={item.url} title={item.label}>
@@ -68,7 +73,9 @@ const Navigation: FC = () => {
     <header className={classes.nav}>
       <div className="container">
         <nav className={classes.content}>
-          <Logo className={classes.logo} />
+          <Link href="/" title="Home">
+            <Logo className={classes.logo} />
+          </Link>
           <div className={classes.group}>
             <ul className={classes.list}>
               {navigationItemEls}

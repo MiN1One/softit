@@ -1,6 +1,8 @@
+import classNames from "classnames";
 import { FC, memo } from "react";
 import ServiceItem from "../ServiceItem/ServiceItem";
-import classes from './ServicesSection.module.scss';
+import classes from './ServicesContainer.module.scss';
+
 
 const serviceItems = [
   {
@@ -8,8 +10,8 @@ const serviceItems = [
     description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".'
   }
 ];
-
-const ServicesSection: FC = () => {
+  
+const ServicesContainer: FC = () => {
 
   const serviceEls = [
     ...serviceItems, 
@@ -20,7 +22,7 @@ const ServicesSection: FC = () => {
     ...serviceItems,
   ].map((item, index) => {
     return (
-      <ServiceItem 
+      <ServiceItem
         value={index.toString()}
         key={index}
         title={item.title}
@@ -29,18 +31,29 @@ const ServicesSection: FC = () => {
     );
   });
 
+
   return (
-    <section className={classes.services}>
+    <section className={classNames(classes.services, 'page-section')}>
       <div className="container">
-        <h3 className="heading heading--3">
-          Services
-        </h3>
-        <div className={classes.cards}>
-          {serviceEls}
+        <div className="page-section__head">
+          <h1 className="heading heading--1">
+            Our services
+          </h1>
+        </div>
+        <div className="page-section__body">
+          <p className="text text--sub">
+            Do you have a project?
+          </p>
+          <h2 className={classNames(classes.heading, "heading heading--3")}>
+            We have a solution for you.
+          </h2>
+          <div className={classes.cards}>
+            {serviceEls}
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-export default memo(ServicesSection);
+export default memo(ServicesContainer);
