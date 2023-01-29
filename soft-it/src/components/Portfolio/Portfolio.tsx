@@ -9,6 +9,10 @@ import Link from "next/link";
 import classNames from "classnames";
 import CustomIcon from "../Common/CustomIcon";
 
+interface PortfolioProps {
+  asSection?: boolean;
+}
+
 const portfolioItems = [
   {
     label: 'View more',
@@ -61,7 +65,7 @@ const portfolioItems = [
   },
 ];
 
-const Portfolio: FC = () => {
+const Portfolio: FC<PortfolioProps> = ({ asSection = false }) => {
   const portfolioEls = portfolioItems.map((item, index) => {
     return (
       <div className={classes.card} key={index}>
@@ -96,22 +100,26 @@ const Portfolio: FC = () => {
   return (
     <section className={classes.portfolio}>
       <div className="container">
-        <h3 className="heading heading--3">
-          Portfolio
-        </h3>
+        {asSection && (
+          <h3 className="heading heading--3">
+            Portfolio
+          </h3>
+        )}
         <div className={classes.cards}>
           {portfolioEls}
         </div>
-        <Link
-          href="/portfolio"
-          className={classNames(
-            classes.btn, 
-            "btn btn--colored btn--arrow btn--outline"
-          )}
-        >
-          <CustomIcon name="arrow" />
-          All projects
-        </Link>
+        {asSection && (
+          <Link
+            href="/portfolio"
+            className={classNames(
+              classes.btn, 
+              "btn btn--colored btn--arrow btn--outline"
+            )}
+          >
+            <CustomIcon name="arrow" />
+            All projects
+          </Link>
+        )}
       </div>
     </section>
   );

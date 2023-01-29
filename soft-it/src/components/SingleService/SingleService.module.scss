@@ -1,0 +1,45 @@
+.service {
+  padding-top: 12.5rem;
+
+  h1.heading {
+    margin-top: 2rem;
+    margin-bottom: 4.5rem;
+  }
+
+  .formWrapper {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .form {
+    padding: 3rem;
+    background: var(--color-dark-secondary);
+    border-radius: 2rem;
+    width: 75%;
+    flex-shrink: 0;
+  }
+  
+  .formContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+
+    & > *:last-child {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .textContainer {
+    margin-right: 5rem;
+  }
+
+  .formFooter {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .form button svg {
+    margin-left: 1rem;
+  }
+}

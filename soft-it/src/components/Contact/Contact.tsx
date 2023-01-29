@@ -9,10 +9,12 @@ const Contact: FC = () => {
   const [phone, setPhone] = useState('');
   const [name, setName] = useState('');
 
-  const onSubmitRequest = useCallback((e: FormEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const onSubmitRequest = useCallback(
+    (e: FormEvent<HTMLButtonElement>) => {
+      e.preventDefault();
 
-  }, []);
+    }, []
+  );
 
   return (
     <section className={classes.contact}>
@@ -28,22 +30,24 @@ const Contact: FC = () => {
             We have a solution
           </p>
           <form className={classes.form}>
-            <Input
-              onChange={setName}
-              value={name}
-              type="text"
-              placeholder="Your name"
-              icon={<CustomIcon name="user" />}
-              required
-            />
-            <Input
-              required
-              onChange={setPhone}
-              icon={<CustomIcon name="phone" />}
-              value={phone}
-              type="tel"
-              placeholder="+998"
-            />
+            <div className={classes.formContent}>
+              <Input
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                type="text"
+                placeholder="Your name"
+                adjacentEl={<CustomIcon name="user" />}
+                required
+              />
+              <Input
+                required
+                onChange={(e) => setPhone(e.target.value)}
+                adjacentEl={<CustomIcon name="phone" />}
+                value={phone}
+                type="tel"
+                placeholder="+998"
+              />
+            </div>
             <button
               title="Submit the form"
               type="submit"

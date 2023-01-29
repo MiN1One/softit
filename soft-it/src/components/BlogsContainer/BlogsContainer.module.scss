@@ -1,0 +1,9 @@
+.blogs {
+  
+  .list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4.5rem;
+    margin-top: 6rem;
+  }
+}

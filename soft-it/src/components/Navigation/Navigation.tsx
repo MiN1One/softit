@@ -58,7 +58,7 @@ const Navigation: FC = () => {
         aria-label={item.label}
         className={classNames(
           classes.item,
-          { [classes.active]: router.pathname === item.url }
+          { [classes.active]: router.pathname.includes(item.url) }
         )}
         key={item.value}
       >

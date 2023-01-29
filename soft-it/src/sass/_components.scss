@@ -1,12 +1,14 @@
-section {
+section:not(.page-section) {
+  margin-bottom: var(--section-vertical-spacing);
+
   .heading,
   .heading + .text,
   .text + .heading {
     margin-bottom: 2rem;
   }
 
-  &:not(:last-child) {
-    margin-bottom: var(--section-vertical-spacing);
+  &:last-child {
+    margin-bottom: 8rem;
   }
 }
 
@@ -19,6 +21,10 @@ section {
   cursor: pointer;
   text-transform: capitalize;
   font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
 
   &--primary,
   &--outline,
@@ -26,8 +32,6 @@ section {
     border: 1px solid rgba(#fff, .8);
     border-radius: .75rem;
     padding: .75rem;
-    display: flex;
-    align-items: center;
     transition: all .3s ease;
   }
 
@@ -87,7 +91,6 @@ section {
     width: 2rem;
     height: 2rem;
     fill: #fff;
-    margin-right: .75rem;
   }
 }
 
@@ -144,36 +147,127 @@ section {
     margin-bottom: 2rem;
   }
 
-  &__input-wrapper {
+  &__label {
+    font-size: 1.6rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    display: inline-block;
+  }
+
+  &__input-wrapper,
+  &__select-wrapper {
     display: flex;
-    background: var(--color-dark);
     align-items: center;
     font-size: 1.4rem;
     position: relative;
-    
-    svg {
-      position: absolute;
-      top: 50%;
-      left: 1.5rem;
-      transform: translateY(-50%);
-      width: 1.8rem;
-      height: 1.8rem;
-      margin-right: 1.5rem;
-    }
+    width: 100%;
   }
   
-  &__input {
-    min-width: 40rem;
+  &__input,
+  &__select,
+  &__text {
+    width: inherit;
     max-width: 100%;
     padding: 1.5rem;
     color: #fff;
-    padding-left: 4.5rem;
+    background: var(--color-dark);
     border: 1px solid rgba(#fff, .2);
     border-radius: .75rem;
+    resize: none;
 
     &:hover,
     &:focus {
       border-color: var(--color-grey-light);
+    }
+  }
+
+  &__text {
+    min-height: 12rem;
+  }
+
+  &__input-wrapper svg,
+  &__select-wrapper svg,
+  &__input-wrapper &__select-wrapper--country,
+  &__select-wrapper--country figure,
+  &__select-wrapper--country span,
+  &__input:not(input) svg {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+  
+  &__input-wrapper svg,
+  &__select-wrapper svg {
+    left: 1.5rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    margin-right: 1.5rem;
+  }
+
+  &__input-wrapper--withAdjacentEl &__input {
+    padding-left: 4.5rem;
+  }
+
+  &__input-wrapper--phone &__input {
+    padding-left: 12rem;
+  }
+
+  &__select {
+    padding-right: 4rem;
+  }
+
+  &__input:not(input) {
+    cursor: pointer;
+    position: relative;
+
+    svg {
+      left: initial;
+      right: 0;
+    }
+  }
+
+  &__select-wrapper {
+    figure {
+      width: 3rem;
+      height: 2rem;
+      z-index: 2;
+    }
+
+    img {
+      object-fit: cover;
+    }
+
+    svg {
+      left: initial;
+      right: 1.5rem;
+      margin: 0;
+    }
+
+    &--country {
+      cursor: pointer;
+      left: 1.5rem;
+      width: auto;
+    }
+    
+    &--country select {
+      z-index: 1;
+      position: relative;
+      width: 10rem;
+      color: transparent;
+    }
+
+    &--country svg,
+    &--country figure {
+      pointer-events: none;
+    }
+
+    &--country span {
+      right: 0;
+    }
+
+    &--country svg {
+      right: 4.5rem;
     }
   }
 }

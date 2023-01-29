@@ -10,17 +10,17 @@ import ServicesSection from "@/components/ServicesSection/ServicesSection";
 
 export default function Home() {
   return (
-    <main>
-      <Layout>
+    <Layout>
+      <main>
         <Hero />
         <CtaGroup />
         <AboutSection />
-        <Portfolio />
+        <Portfolio asSection />
         <ServicesSection />
         <PartnersSection />
         <Contact />
         <BannerHiring />
-      </Layout>
-    </main>
+      </main>
+    </Layout>
   )
 }

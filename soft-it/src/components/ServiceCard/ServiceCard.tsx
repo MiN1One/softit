@@ -1,26 +1,20 @@
 import classNames from "classnames";
+import Link from "next/link";
 import { FC, memo } from "react";
 import CustomIcon from "../Common/CustomIcon";
-import classes from './ServiceItem.module.scss';
+import classes from './ServiceCard.module.scss';
 
-interface ServiceItemProps {
+interface ServiceCardProps {
   title: string;
   description: string;
-  value: string;
-  onClick?: (value: string) => void;
+  url?: string;
 }
 
-const ServiceItem: FC<ServiceItemProps> = (props) => {
-  const { description, title, onClick, value } = props;
-  return (
-    <div 
-      className={classes.service} 
-      onClick={
-        typeof onClick === 'function' 
-          ? () => onClick(value) 
-          : undefined
-      }
-    >
+const ServiceCard: FC<ServiceCardProps> = (props) => {
+  const { description, title, url } = props;
+  
+  let content = (
+    <div className={classes.service}>
       <div className={classes.icon}>
         <CustomIcon name="arrow" />
       </div>
@@ -35,6 +29,16 @@ const ServiceItem: FC<ServiceItemProps> = (props) => {
       </p>
     </div>
   );
+
+  if (url) {
+    content = (
+      <Link href={url} title={title}>
+        {content}
+      </Link>
+    );
+  }
+
+  return content;
 };  
 
-export default memo(ServiceItem);
+export default memo(ServiceCard);

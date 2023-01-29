@@ -1,36 +1,53 @@
 import classNames from "classnames";
-import { FC, memo } from "react";
-import ServiceItem from "../ServiceItem/ServiceItem";
+import { FC, FormEvent, memo, useCallback, useState } from "react";
+import ServiceCard from "../ServiceCard/ServiceCard";
 import classes from './ServicesContainer.module.scss';
 
 
-const serviceItems = [
+const ServiceCards = [
   {
     title: 'Frontend Development',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".'
+    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".',
+    url: '/services/:serviceId',
+  },
+  {
+    title: 'Frontend Development',
+    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".',
+    url: '/services/:serviceId',
+  },
+  {
+    title: 'Frontend Development',
+    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".',
+    url: '/services/:serviceId',
+  },
+  {
+    title: 'Frontend Development',
+    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".',
+    url: '/services/:serviceId',
+  },
+  {
+    title: 'Frontend Development',
+    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".',
+    url: '/services/:serviceId',
+  },
+  {
+    title: 'Frontend Development',
+    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".',
+    url: '/services/:serviceId',
   }
 ];
   
 const ServicesContainer: FC = () => {
-
-  const serviceEls = [
-    ...serviceItems, 
-    ...serviceItems,
-    ...serviceItems,
-    ...serviceItems,
-    ...serviceItems,
-    ...serviceItems,
-  ].map((item, index) => {
+  const serviceEls = ServiceCards.map((item, index) => {
     return (
-      <ServiceItem
-        value={index.toString()}
+      <ServiceCard
+        url={item.url}
         key={index}
         title={item.title}
         description={item.description}
       />
     );
   });
-
 
   return (
     <section className={classNames(classes.services, 'page-section')}>
