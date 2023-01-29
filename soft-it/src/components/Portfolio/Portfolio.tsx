@@ -68,7 +68,12 @@ const portfolioItems = [
 const Portfolio: FC<PortfolioProps> = ({ asSection = false }) => {
   const portfolioEls = portfolioItems.map((item, index) => {
     return (
-      <div className={classes.card} key={index}>
+      <Link
+        className={classes.card}
+        key={index}
+        href={item.url}
+        title={item.title}
+      >
         <figure className={classes.figure}>
           <img
             src={item.image}
@@ -87,13 +92,13 @@ const Portfolio: FC<PortfolioProps> = ({ asSection = false }) => {
             <span className="text text--sub">{item.subtitle}</span>
           </div>
           <div className={classes.cardActions}>
-            <Link className={classes.cardLink} href={item.url}>
+            <div className={classes.cardLink}>
               {item.label}
               <CustomIcon name="arrow" />
-            </Link>
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
     );
   });
 

@@ -11,5 +11,16 @@
   --color-pink: #D13291;
   --color-pink-dark: #ae2477;
 
+  --moon-transform-top: 65%;
+  --moon-transform-top-neg: -65%;
   --section-vertical-spacing: 20rem;
+  
+  @include respond('tablet') {
+    --moon-transform-top-neg: -50%;
+    --moon-transform-top: 50%;
+  }
+
+  @include respond('mid') {
+    --section-vertical-spacing: 10rem;
+  }
 }

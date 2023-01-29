@@ -22,15 +22,17 @@ const SingleService: FC = () => {
   );
 
   return (
-    <section className={classNames('page-section', classes.service)}>
+    <section className={classes.service}>
       <div className="container">
-        <div className={classes.content}>
-          <p className="text text--sub">
-            Do you have a project?
-          </p>
-          <h1 className={classNames(classes.heading, "heading heading--3")}>
-            We have a solution for you.
-          </h1>
+        <div>
+          <div className={classes.head}>
+            <p className="text text--sub">
+              Do you have a project?
+            </p>
+            <h1 className={classNames(classes.heading, "heading heading--3")}>
+              We have a solution for you.
+            </h1>
+          </div>
           <div className={classes.formWrapper}>
             <p className={classNames(classes.textContainer, "text text--sub")}>
               After you fill in this basic information, our responsible staff will contact you.

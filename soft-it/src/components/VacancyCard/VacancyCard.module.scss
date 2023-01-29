@@ -1,3 +1,5 @@
+@use '../../sass/mixins' as *;
+
 .vacancy {
   padding: 2rem;
   background: var(--color-dark-secondary);
@@ -20,6 +22,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-bottom: 3rem;
+    justify-content: space-between;
+    column-gap: 2rem;
   }
 
   .infoGroup {

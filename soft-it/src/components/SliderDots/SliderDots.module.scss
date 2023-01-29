@@ -1,0 +1,17 @@
+.dots {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 2.35rem 0;
+  opacity: .8;
+
+  span {
+    height: 2px;
+    background: var(--color-grey);
+    width: 3rem;
+  }
+
+  span.active {
+    background: #fff;
+  }
+}

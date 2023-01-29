@@ -1,3 +1,5 @@
+@use '../../sass/mixins' as *;
+
 .hero {
   height: 100vh;
   width: 100%;
@@ -9,9 +11,9 @@
 
   .moonImage {
     position: absolute;
-    top: 65%;
+    top: var(--moon-transform-top);
     left: 50%;
-    transform: translate(-50%, -65%);
+    transform: translate(-50%, var(--moon-transform-top-neg));
     z-index: 1;
     pointer-events: none;
 
@@ -27,6 +29,10 @@
       box-shadow: 0 0 7rem rgba(#fff, .3);
       border-radius: 50%;
       backface-visibility: hidden;
+
+      @include respond('wide') {
+        box-shadow: 0 0 10vw rgba(#fff, .3);
+      }
     }
 
     img {
@@ -35,8 +41,13 @@
       transform-origin: center;
       animation: rotate 10s linear infinite 2s;
       backface-visibility: hidden;
-    }
 
+      @include respond('tablet') {
+        height: 30rem;
+        width: 30rem;
+      }
+    }
+    
     &.loaded {
       animation: transformUp 2s ease;
     }
@@ -61,6 +72,14 @@
       width: 100%;
       height: auto;
     }
+
+    @include respond('tablet') {
+      width: 200vh;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 }
 
@@ -69,6 +88,10 @@
 }
 
 @keyframes transformUp {
-  from { transform: translate(-50%, 10%); }
-  to { transform: translate(-50%, -65%); }
+  from {
+    transform: translate(-50%, 10%);
+  }
+  to {
+    transform: translate(-50%, var(--moon-transform-top-neg));
+  }
 }

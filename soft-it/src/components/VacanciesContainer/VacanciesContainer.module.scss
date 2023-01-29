@@ -1,8 +1,18 @@
+@use '../../sass/mixins' as *;
+
 .vacancies {
 
   .cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2.35rem;
+
+    @include respond('tablet') {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @include respond('mid-low') {
+      grid-template-columns: 1fr;
+    }
   }
 }

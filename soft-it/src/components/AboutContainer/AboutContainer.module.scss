@@ -1,9 +1,12 @@
-.about {
-  
+@use '../../sass/mixins' as *;
 
+.about {
   .textContainer {
     margin-bottom: 10rem;
-    max-width: 70%;
+    max-width: 70rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
   }
   
   .sliderWrapper {
@@ -11,17 +14,28 @@
     background: var(--color-dark-secondary);
     
     .text {
-      max-width: 45%;
+      max-width: 50rem;
     }
   }
   
   .sliderHead {
     padding: 2.35rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+
+    @include respond('mid-low') {
+      padding: 3.5rem;
+    }
   }
 
   .slides {
     height: 20rem;
     position: relative;
+
+    @include respond('mid-low') {
+      height: 35vw;
+    }
   }
 
   .btnControl {
@@ -68,24 +82,6 @@
       position: absolute;
       top: 0;
       left: 0;
-    }
-  }
-
-  .sliderDots {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    padding: 2.35rem 0;
-    opacity: .8;
-
-    span {
-      height: 2px;
-      background: var(--color-grey);
-      width: 3rem;
-    }
-
-    span.active {
-      background: #fff;
     }
   }
 }

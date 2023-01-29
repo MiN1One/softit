@@ -1,3 +1,5 @@
+@use '../../sass/mixins' as *;
+
 .contact {
 
   .content {
@@ -6,6 +8,8 @@
     position: relative;
     padding: 4.5rem 4rem;
     background: #0D0D0D;
+    display: flex;
+    flex-direction: column;
 
     &::after {
       content: "";
@@ -19,11 +23,32 @@
       height: 100%;
       z-index: 2;
     }
+
+    @include respond('mid-low') {
+      padding: 3rem;
+      padding-bottom: 8.5rem;
+      row-gap: 1.5rem;
+
+      & > h3, 
+      & > p {
+        margin-bottom: 0 !important;
+      }
+
+      &::after { top: 10%; }
+    }
   }
 
   .formContent {
     margin-bottom: 1.5rem;
     width: 38%;
+
+    @include respond('mid') {
+      width: 65%;
+    }    
+
+    @include respond('mid-low') {
+      width: 100%;
+    }
   }
 
   .moonWrapper {
@@ -42,6 +67,11 @@
       height: 99%;
       border-radius: 50%;
       box-shadow: 0 0 6rem rgba(#fff, .2);
+    }
+
+    @include respond('mid-low') {
+      top: 60%;
+      right: -15%;
     }
   }
 

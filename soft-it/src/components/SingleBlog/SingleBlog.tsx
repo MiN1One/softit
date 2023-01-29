@@ -1,10 +1,15 @@
 import { IBlog } from "@/interfaces/blog.interface";
-import { FC, memo } from "react";
+import { FC, memo, useState } from "react";
 import classes from "./SingleBlog.module.scss";
 import image from '@assets/images/image 2.png';
 import classNames from "classnames";
 import CustomIcon from "../Common/CustomIcon";
 import dayjs from "dayjs";
+import { Swiper, SwiperSlide } from "swiper/react";
+import BlogCard from "../BlogCard/BlogCard";
+import imageSm from '@assets/images/Rectangle 37.png';
+import SafeHydrate from "../Common/SafeHydrate";
+import SliderDots from "../SliderDots/SliderDots";
 
 const blog: IBlog = {
   title: 'Next achievement of Soft IT Group',
@@ -16,7 +21,19 @@ const blog: IBlog = {
   id: '1'
 };
 
+const recommendedItems = [blog, blog, blog, blog, blog, blog, blog];
+
 const SingleBlog: FC = () => {
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+
+  const blogEls = recommendedItems.map((blog, index) => {
+    return (
+      <SwiperSlide className={classes.slide} key={index}>
+        <BlogCard blog={{ ...blog, image: imageSm.src }} />
+      </SwiperSlide>
+    );
+  });
+
   return (
     <section className={classNames(classes.blog, 'page-section')}>
       <div className="container">
@@ -43,6 +60,40 @@ const SingleBlog: FC = () => {
         <p 
           className={classNames(classes.text, "text")}
           dangerouslySetInnerHTML={{ __html: blog.html }}
+        />
+      </div>
+      <div className={classes.recommended}>
+        <h2 className="heading heading--3">
+          Recommended
+        </h2>
+        <SafeHydrate style={{ width: '100%' }}>
+          <Swiper 
+            onRealIndexChange={(sw) => setActiveSlideIndex(sw.realIndex)}
+            spaceBetween={20}
+            centeredSlides
+            loop
+            slidesPerView={1}
+            breakpoints={{
+              1400: {
+                slidesPerView: 2.75,
+              },
+              1025: {
+                slidesPerView: 2.35,
+              },
+              769: {
+                freeMode: true,
+                slidesPerView: 1.5
+              }
+            }}
+            className={classes.slider}
+          >
+            {blogEls}
+          </Swiper>
+        </SafeHydrate>
+        <SliderDots
+          dotsCount={recommendedItems.length}
+          activeIndex={activeSlideIndex}
+          className={classes.dots}
         />
       </div>
     </section>

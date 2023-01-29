@@ -1,3 +1,5 @@
+@use '../../sass/mixins' as *;
+
 .blogs {
   
   .list {
@@ -5,5 +7,9 @@
     grid-template-columns: 1fr 1fr;
     gap: 4.5rem;
     margin-top: 6rem;
+
+    @include respond('regular') {
+      grid-template-columns: 1fr;
+    }
   }
 }

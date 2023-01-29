@@ -1,15 +1,30 @@
+import { useGlobalContext } from "@/contexts/GlobalContext";
+import dynamic from "next/dynamic";
 import React, { FC } from "react";
 import Footer from "../Footer/Footer";
-import Navigation from "../Navigation/Navigation";
+import SafeHydrate from "./SafeHydrate";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
+const AsyncNavigation = dynamic(() => 
+  import('@components/Navigation/Navigation')
+);
+const AsyncMobileNavigation = dynamic(() => 
+  import('@components/MobileNavigation/MobileNavigation')
+);
+
 const Layout: FC<LayoutProps> = ({ children }) => {
+  const { media } = useGlobalContext();
   return (
     <React.Fragment>
-      <Navigation />
+      <SafeHydrate releaseContent>
+        {media.tablet
+          ? <AsyncMobileNavigation />
+          : <AsyncNavigation />
+        }
+      </SafeHydrate>
       {children}
       <Footer />
     </React.Fragment>

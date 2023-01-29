@@ -1,3 +1,5 @@
+@use '../../sass/mixins' as *;
+
 .blog {
   padding-top: 10rem;
   background: linear-gradient(rgba(209, 50, 145, 0.2) 5%, transparent 35%);
@@ -10,6 +12,11 @@
     border-radius: 3rem;
     overflow: hidden;
     margin-bottom: 10rem;
+
+    @include respond('mid') {
+      padding-bottom: 65%;
+      margin-bottom: 6rem;
+    }
     
     &::after {
       content: "";
@@ -33,6 +40,10 @@
     padding: 3rem;
     z-index: 2;
     row-gap: 1.5rem;
+
+    @include respond('mid') {
+      padding: 2rem;
+    }
   }
 
   .infoGroup {
@@ -42,7 +53,7 @@
   }
 
   .text {
-    max-width: 75%;
+    max-width: 75rem;
   }
 
   .group {
@@ -50,6 +61,7 @@
     align-items: center;
     column-gap: 1rem;
     font-size: 1.6rem;
+    color: #fff;
 
     svg {
       width: 1.6rem;
@@ -70,4 +82,34 @@
       object-fit: cover;
     }
   }
+
+  .recommended {
+    padding: 4rem 0;
+    background: var(--color-dark);
+    margin-top: 12rem;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 3rem;
+  }
+  
+  .slider {
+    width: 100%;
+    
+    @include respond('mid') {
+      padding-left: 2rem;
+    }
+  }
+
+  .dots {
+    display: none;
+    padding: 0;
+    
+    @include respond('tablet') {
+      display: flex;
+    }
+  }
+
+  .slide { padding: 2rem; }
 }

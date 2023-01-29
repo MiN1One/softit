@@ -1,3 +1,5 @@
+@use '../../sass/mixins' as *;
+
 .vacancy {
 
   .content {
@@ -17,6 +19,11 @@
       border-bottom: 1px solid var(--color-grey-dark);
       padding-bottom: 3rem;
       margin-bottom: 3rem;
+
+      @include respond('mid') {
+        padding-bottom: 2rem;
+        margin-bottom: 2rem;
+      }
     }
   }
 
@@ -24,6 +31,11 @@
     display: flex;
     column-gap: 4.25rem;
     font-size: 1.4rem;
+
+    @include respond('mid') {
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
 
     svg {
       width: 2rem;
@@ -42,6 +54,7 @@
   .group {
     display: flex;
     align-items: center;
+    flex-grow: 1;
   }
 
   .form {
@@ -52,6 +65,10 @@
     & > *:last-child {
       grid-column: 1 / -1;
       padding: 1rem 0;
+    }
+
+    @include respond('mid') {
+      grid-template-columns: 1fr;
     }
   }
 

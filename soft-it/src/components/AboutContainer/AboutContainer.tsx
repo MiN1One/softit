@@ -8,6 +8,8 @@ import image4 from '@assets/images/slide4.png';
 import CustomIcon from "../Common/CustomIcon";
 import classNames from "classnames";
 import { Navigation } from 'swiper';
+import SafeHydrate from "../Common/SafeHydrate";
+import SliderDots from "../SliderDots/SliderDots";
 
 const slides = [
   image1.src,
@@ -41,19 +43,6 @@ const AboutContainer:FC = () => {
     classes.btnControlRight
   );
 
-  const dotEls = useMemo(() => (
-    Array.from(Array(slideEls.length).keys()).map(index => {
-      return (
-        <span 
-          tabIndex={0}
-          className={classNames({ [classes.active]: index === activeSlide })}
-          key={index} 
-          onClick={() => swiperRef.current?.swiper.slideToLoop(index)}
-        />
-      );
-    })
-  ), [activeSlide, slideEls]);
-
   return (
     <section className={classNames(classes.about, "page-section")}>
       <div className="container">
@@ -82,31 +71,43 @@ const AboutContainer:FC = () => {
                 All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. 
               </p>
             </div>
-            <Swiper
-              loop
-              ref={swiperRef}
-              centeredSlides
-              onSlideChange={(sw) => setActiveSlide(sw.realIndex)}
-              className={classes.slides}
-              slidesPerView={3.35}
-              modules={[Navigation]}
-              spaceBetween={20}
-              navigation={{
-                prevEl: `.${classes.btnControlLeft}`,
-                nextEl: `.${classes.btnControlRight}`,
-              }}
-            >
-              {slideEls}
-              <button className={btnControlLeftClass}>
-                <CustomIcon name="arrow-left" />
-              </button>
-              <button className={btnControlRightClass}>
-                <CustomIcon name="arrow-right" />
-              </button>
-            </Swiper>
-            <div className={classes.sliderDots}>
-              {dotEls}
-            </div>
+            <SafeHydrate>
+              <Swiper
+                loop
+                ref={swiperRef}
+                centeredSlides
+                onSlideChange={(sw) => setActiveSlide(sw.realIndex)}
+                className={classes.slides}
+                slidesPerView={1.75}
+                modules={[Navigation]}
+                breakpoints={{
+                  500: {
+                    slidesPerView: 2.25
+                  },
+                  700: {
+                    slidesPerView: 3.35
+                  },
+                }}
+                spaceBetween={20}
+                navigation={{
+                  prevEl: `.${classes.btnControlLeft}`,
+                  nextEl: `.${classes.btnControlRight}`,
+                }}
+              >
+                {slideEls}
+                <button className={btnControlLeftClass}>
+                  <CustomIcon name="arrow-left" />
+                </button>
+                <button className={btnControlRightClass}>
+                  <CustomIcon name="arrow-right" />
+                </button>
+              </Swiper>
+            </SafeHydrate>
+            <SliderDots
+              dotsCount={slideEls.length}
+              activeIndex={activeSlide}
+              onClick={(index) => swiperRef.current?.swiper.slideToLoop(index)}
+            />
           </div>
         </div>
       </div>

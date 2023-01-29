@@ -14,15 +14,26 @@ const CtaGroup: FC = () => {
             <h2 className={classNames("heading heading--2", classes.heading)}>
               We offer best digital<br /> solutions for your business
             </h2>
-            <div className={classNames(classes.subtitle, "text--lg text--sub")}>
+            <div className={classNames(
+              classes.subtitle, 
+              "text--lg text--sub text"
+            )}>
               For any Business
             </div>
             <div className="btn-group">
-              <a href="tel:+998999999999" title="Phone call" className="btn btn--primary">
+              <a 
+                href="tel:+998999999999" 
+                title="Phone call" 
+                className="btn btn--primary"
+              >
                 <CustomIcon name="call" />
                 Call us
               </a>
-              <a href="/portfolio" title="Phone call" className="btn btn--outline btn--arrow">
+              <a 
+                href="/portfolio" 
+                title="Phone call" 
+                className="btn btn--outline btn--arrow"
+              >
                 <CustomIcon name="arrow" />
                 Our portfolio
               </a>

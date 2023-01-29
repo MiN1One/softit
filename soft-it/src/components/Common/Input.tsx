@@ -108,6 +108,7 @@ export const PhoneInput: FC<PhoneInputProps> = (props) => {
     >
       <input
         {...restProps}
+        readOnly={props.readOnly || (!props.onChange && Boolean(props.value))}
         type="tel"
         className="input-group__input"
       />
@@ -146,7 +147,11 @@ export const CountrySelector: FC<SelectProps> = (props) => {
           height="100%"
         />
       </figure>
-      <select ref={selectRef} {...props}>
+      <select 
+        value={countryPhoneCodes[0].dial_code} 
+        {...props} 
+        ref={selectRef}
+      >
         {countryEls}
       </select>
       <span className="text--sub">{props.value}</span>
@@ -174,7 +179,11 @@ export const TextField: FC<
       wrapperClass={wrapperClass}
       adjacentEl={adjacentEl}
     >
-      <textarea className="input-group__text" {...restProps}>
+      <textarea 
+        {...restProps}
+        readOnly={props.readOnly || (!props.onChange && Boolean(props.value))}
+        className="input-group__text" 
+      >
         {value}
       </textarea>
     </InputSkeleton>
@@ -199,6 +208,7 @@ const Input: FC<InputProps & GeneralInputProps> = (props) => {
     >
       <input
         {...restProps}
+        readOnly={props.readOnly || (!props.onChange && Boolean(props.value))}
         className="input-group__input"
       />
     </InputSkeleton>
@@ -236,7 +246,13 @@ export const FileInput: FC<
         {fileName || restProps.placeholder}
         <CustomIcon name="add" />
       </div>
-      <input {...restProps} ref={inputRef} hidden type="file" />
+      <input 
+        {...restProps} 
+        ref={inputRef} 
+        hidden 
+        type="file"
+        readOnly={props.readOnly || (!props.onChange && Boolean(props.value))}
+      />
     </InputSkeleton>
   );
 };
@@ -256,7 +272,6 @@ export const CustomSelect: FC<
     return (
       <option 
         key={option + index.toString()}
-        selected={restProps.value === option.value || index === 0} 
         value={option.value}
       >
         {option.label}
@@ -271,7 +286,11 @@ export const CustomSelect: FC<
       labelSize={labelSize}
     >
       <div className="input-group__select-wrapper">
-        <select {...restProps} className="input-group__select">
+        <select 
+          value={options[0]?.value} 
+          {...restProps} 
+          className="input-group__select"
+        >
           {optionEls}
         </select>
         <CustomIcon name="arrow-down" />

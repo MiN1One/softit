@@ -1,5 +1,7 @@
+@use '../../sass/mixins' as *;
+
 .service {
-  padding-top: 12.5rem;
+  padding-top: 5rem;
 
   h1.heading {
     margin-top: 2rem;
@@ -9,6 +11,13 @@
   .formWrapper {
     display: flex;
     align-items: flex-start;
+    column-gap: 5rem;
+    row-gap: 2rem;
+
+    @include respond('mid') {
+      flex-direction: column;
+      align-items: stretch;
+    }
   }
 
   .form {
@@ -17,6 +26,19 @@
     border-radius: 2rem;
     width: 75%;
     flex-shrink: 0;
+
+    @include respond('mid') {
+      width: 100%;
+      padding: 2rem;
+    }
+  }
+
+  .head {
+    margin-bottom: 5rem;
+  }
+
+  .textContainer {
+    max-width: 30rem;
   }
   
   .formContent {
@@ -28,10 +50,11 @@
     & > *:last-child {
       grid-column: 1 / -1;
     }
-  }
 
-  .textContainer {
-    margin-right: 5rem;
+    @include respond('mid') {
+      grid-template-columns: 1fr;
+      margin-bottom: 4rem;
+    }
   }
 
   .formFooter {

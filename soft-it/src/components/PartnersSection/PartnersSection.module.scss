@@ -1,12 +1,25 @@
+@use '../../sass/mixins' as *;
+
 .partners {
 
   .card {
     border-radius: 1rem;
+
+    @include respond('mid-low') {
+      // show only 6
+      &:nth-of-type(1n+7) {
+        display: none;
+      }
+    }
   }
 
   .cards {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
+
+    @include respond ('mid-low') {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 }

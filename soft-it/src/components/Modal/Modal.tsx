@@ -1,3 +1,4 @@
+import useHideScrollbar from "@/hooks/useHideScrollbar";
 import classNames from "classnames";
 import { FC, memo, useEffect } from "react";
 import CustomIcon from "../Common/CustomIcon";
@@ -12,13 +13,7 @@ interface ModalProps {
 const Modal: FC<ModalProps> = (props) => {
   const { onClose, open, children } = props;
 
-  useEffect(() => {
-    if (open) {
-      document.documentElement.style.overflow = 'hidden';
-    } else {
-      document.documentElement.style.removeProperty('overflow');
-    }
-  }, [open]);
+  useHideScrollbar(open);
 
   if (!open) {
     return null;
@@ -28,16 +23,18 @@ const Modal: FC<ModalProps> = (props) => {
     <div role="dialog" className={classNames(classes.modal)}>
       <div className={classes.backdrop} onClick={onClose} />
       <div className={classes.contentWrapper}>
-        <button
-          type="button"
-          title="Close"
-          onClick={onClose}
-          className={classes.close}
-        >
-          <CustomIcon name="close" />
-        </button>
         <div className={classes.content}>
-          {children}
+          <button
+            type="button"
+            title="Close"
+            onClick={onClose}
+            className={classes.close}
+          >
+            <CustomIcon name="close" />
+          </button>
+          <div className={classes.body}>
+            {children}
+          </div>
         </div>
       </div>
     </div>

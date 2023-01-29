@@ -1,3 +1,5 @@
+@use '../../sass/mixins' as *;
+
 .modal {
   position: fixed;
   top: 0;
@@ -33,19 +35,35 @@
   }
 
   .contentWrapper {
-    margin-top: 20vh;
     position: relative;
     z-index: 2;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    height: max-content;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    width: 100%;
   }
   
   .content {
-    width: 55vw;
+    width: 55%;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    
+    @include respond('tablet') {
+      width: calc(100% - 4rem);
+    }
+  }
+  
+  .body {
     background: var(--color-dark-secondary);
     padding: 4rem;
     border-radius: 2rem;
+    width: 100%;
+
+    @include respond('mid') {
+      padding: 2rem;
+    }
   }
 }

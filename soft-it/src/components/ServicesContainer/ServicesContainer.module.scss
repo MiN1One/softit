@@ -1,9 +1,15 @@
+@use '../../sass/mixins' as *;
+
 .services {
 
   .cards {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
+
+    @include respond('mid-low') {
+      grid-template-columns: 1fr;
+    }
   }
 
   h2.heading {

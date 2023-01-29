@@ -49,6 +49,10 @@
   &--2 {
     font-size: 3rem;
     font-weight: 600;
+
+    @include respond('mid-low') {
+      font-size: 2.4rem;
+    }
   }
 
   &--3 {
@@ -63,5 +67,9 @@
   &--xlg {
     font-size: 10vw;
     font-weight: 700;
+
+    @include respond('mid') {
+      font-size: 13vw;
+    }
   }
 }

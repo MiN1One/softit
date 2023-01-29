@@ -1,3 +1,5 @@
+@use '../../sass/mixins' as *;
+
 .banner {
 
   .content {
@@ -7,6 +9,11 @@
     align-items: flex-start;
     background: var(--color-dark-secondary);
     border-radius: 1.5rem;
+    gap: 2rem;
+
+    @include respond('mid-low') {
+      flex-direction: column;      
+    }
   }
 
   .heading {
@@ -22,6 +29,10 @@
       top: 55%;
       right: 9.5rem;
     }
+
+    @include respond('mid-low') {
+      max-width: 60rem;
+    }
   }
 
   .tags {
@@ -29,6 +40,10 @@
     direction: rtl;
     grid-template-columns: 1fr 1fr;
     gap: 1.65rem;
+
+    @include respond('tablet') {
+      grid-template-columns: 1fr;
+    }
   }
 
   .tag {

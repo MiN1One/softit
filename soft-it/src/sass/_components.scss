@@ -1,3 +1,5 @@
+// @use './mixins' as *;
+
 section:not(.page-section) {
   margin-bottom: var(--section-vertical-spacing);
 
@@ -15,6 +17,10 @@ section:not(.page-section) {
 .container {
   margin: 0 auto;
   max-width: 110rem;
+
+  @include respond('regular') {
+    padding: 0 2rem; 
+  }
 }
 
 .btn {
@@ -24,7 +30,7 @@ section:not(.page-section) {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .75rem;
+  column-gap: .75rem;
 
   &--primary,
   &--outline,
@@ -115,7 +121,6 @@ section:not(.page-section) {
 }
 
 .page-section {
-  margin-top: 7.5rem;
   padding-bottom: 15rem;
 
   &__head {
