@@ -3,8 +3,9 @@ import type { AppProps } from 'next/app';
 import FontProvider from '@components/Common/FontProvider';
 import { GlobalContextProvider } from '@/contexts/GlobalContext';
 import 'swiper/swiper-bundle.css';
+import { appWithTranslation } from 'next-i18next';
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return (
     <GlobalContextProvider>
       <FontProvider>
@@ -13,3 +14,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </GlobalContextProvider>
   );
 }
+
+export default appWithTranslation(App);

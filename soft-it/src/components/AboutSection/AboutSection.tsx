@@ -5,6 +5,7 @@ import image2 from '@assets/images/image2.png';
 import image3 from '@assets/images/image3.png';
 import image4 from '@assets/images/image4.png';
 import classNames from "classnames";
+import { useTranslation } from "next-i18next";
 
 const cardItems = [
   {
@@ -30,6 +31,7 @@ const cardItems = [
 ];
 
 const AboutSection: FC = () => {
+  const { t } = useTranslation();
 
   const cardEls = cardItems.map((card, index) => {
     return (
@@ -55,7 +57,7 @@ const AboutSection: FC = () => {
     <section className={classes.about}>
       <div className="container">
         <h3 className="heading heading--3">
-          About us
+          {t('about')}
         </h3>
         <p className={classNames(classes.text, "text text--sub")}>
           The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum"

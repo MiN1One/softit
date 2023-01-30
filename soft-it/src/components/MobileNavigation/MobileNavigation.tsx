@@ -3,11 +3,13 @@ import useHideScrollbar from "@/hooks/useHideScrollbar";
 import classNames from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { FC, memo, useEffect } from "react";
+import React, { FC, memo, useEffect, useTransition } from "react";
 import CustomIcon from "../Common/CustomIcon";
 import Logo from "../Common/Logo";
 import Dropdown from "../Dropdown/Dropdown";
+import languages from "@/config/languages";
 import classes from './MobileNavigation.module.scss';
+import { useTranslation } from "react-i18next";
 
 const data = {
   phone_number: {
@@ -49,16 +51,12 @@ const data = {
   ],
 };
 
-const languages = [
-  { label: 'English', value: 'en' }
-];
-
 const MobileNavigation: FC = () => {
   const {
     showMobileNav,
     setShowMobileNav,
+    changeLanguage,
     activeLang,
-    setActiveLang,
   } = useGlobalContext();
   const { pathname } = useRouter();
 
@@ -123,7 +121,7 @@ const MobileNavigation: FC = () => {
                 </React.Fragment>
               )}
               items={languages}
-              onClickItem={setActiveLang}
+              onClickItem={changeLanguage}
             />
           </div>
         </div>

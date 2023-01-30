@@ -4,7 +4,7 @@ import { FC, memo } from "react";
 import CustomIcon from "../Common/CustomIcon";
 import { LogoNoText } from "../Common/Logo";
 import classes from './Footer.module.scss';
-import designerImage from '@assets/images/_x31_.png';
+// import designerImage from '@assets/images/_x31_.png';
 
 const footerData = {
   links: [
@@ -116,7 +116,7 @@ const Footer: FC = () => {
               {currentYear} Soft IT Group
             </span>
             <LogoNoText />
-            <div className={classes.designer}>
+            {/* <div className={classes.designer}>
               <span className="text--sub text text--sm">
                 Designed by:
               </span>
@@ -126,7 +126,7 @@ const Footer: FC = () => {
                 width={designerImage.width}
                 height={designerImage.height}
               />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

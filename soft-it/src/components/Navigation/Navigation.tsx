@@ -7,18 +7,14 @@ import CustomIcon from "../Common/CustomIcon";
 import Logo from "../Common/Logo";
 import Dropdown from "../Dropdown/Dropdown";
 import classes from './Navigation.module.scss';
+import languages from "@/config/languages";
+import { useTranslation } from "react-i18next";
 
 const data = {
   phone_number: {
     label: '+99899 <span class="text--highlight">999 99 99</span>',
     value: '+9989999999'
   },
-  languages: [
-    {
-      label: 'English',
-      value: 'en'
-    }
-  ],
   navigation_items: [
     {
       label: 'About Us',
@@ -49,7 +45,7 @@ const data = {
 };
 
 const Navigation: FC = () => {
-  const { setActiveLang } = useGlobalContext();
+  const { changeLanguage, activeLang, } = useGlobalContext();
   const router = useRouter();
 
   const navigationItemEls = data.navigation_items.map(item => {
@@ -90,11 +86,11 @@ const Navigation: FC = () => {
               label={(
                 <span className={classNames(classes.language, "text--upc")}>
                   <CustomIcon name="global" />
-                  Eng
+                  {activeLang.toUpperCase()}
                 </span>
               )}
-              items={data.languages}
-              onClickItem={setActiveLang}
+              items={languages}
+              onClickItem={changeLanguage}
             />
           </div>
         </nav>
