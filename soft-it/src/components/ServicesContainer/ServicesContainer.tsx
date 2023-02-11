@@ -1,48 +1,23 @@
+import { IService } from "@/interfaces/service.interface";
 import classNames from "classnames";
-import { FC, FormEvent, memo, useCallback, useState } from "react";
+import { FC, memo } from "react";
+import { useTranslation } from "next-i18next";
 import ServiceCard from "../ServiceCard/ServiceCard";
 import classes from './ServicesContainer.module.scss';
-
-
-const ServiceCards = [
-  {
-    title: 'Frontend Development',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".',
-    url: '/services/:serviceId',
-  },
-  {
-    title: 'Frontend Development',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".',
-    url: '/services/:serviceId',
-  },
-  {
-    title: 'Frontend Development',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".',
-    url: '/services/:serviceId',
-  },
-  {
-    title: 'Frontend Development',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".',
-    url: '/services/:serviceId',
-  },
-  {
-    title: 'Frontend Development',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".',
-    url: '/services/:serviceId',
-  },
-  {
-    title: 'Frontend Development',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".',
-    url: '/services/:serviceId',
-  }
-];
   
-const ServicesContainer: FC = () => {
-  const serviceEls = ServiceCards.map((item, index) => {
+interface ServicesContainerProps {
+  data: IService[];
+}
+
+const ServicesContainer: FC<ServicesContainerProps> = (props) => {
+  const { data } = props;
+  const { t } = useTranslation();
+
+  const serviceEls = data.map((item) => {
     return (
       <ServiceCard
-        url={item.url}
-        key={index}
+        url={`/services/${item.id}`}
+        key={item.id}
         title={item.title}
         description={item.description}
       />
@@ -54,15 +29,15 @@ const ServicesContainer: FC = () => {
       <div className="container">
         <div className="page-section__head">
           <h1 className="heading heading--1">
-            Our services
+            {t('ourServices')}
           </h1>
         </div>
         <div className="page-section__body">
           <p className="text text--sub">
-            Do you have a project?
+            {t('contactTitle')}
           </p>
           <h2 className={classNames(classes.heading, "heading heading--3")}>
-            We have a solution for you.
+            {t('contactSubtitle')}
           </h2>
           <div className={classes.cards}>
             {serviceEls}

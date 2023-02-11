@@ -9,47 +9,6 @@ import Logo from "../Common/Logo";
 import Dropdown from "../Dropdown/Dropdown";
 import languages from "@/config/languages";
 import classes from './MobileNavigation.module.scss';
-import { useTranslation } from "react-i18next";
-
-const data = {
-  phone_number: {
-    label: '+99899 <span class="text--highlight">999 99 99</span>',
-    value: '+9989999999'
-  },
-  languages: [
-    {
-      label: 'English',
-      value: 'en'
-    }
-  ],
-  navigation_items: [
-    {
-      label: 'About Us',
-      value: 'about-us',
-      url: '/about',
-    },
-    {
-      label: 'Services',
-      value: 'services',
-      url: '/services',
-    },
-    {
-      label: 'Portfolio',
-      value: 'portfolio',
-      url: '/portfolio',
-    },
-    {
-      label: 'Vacancies',
-      value: 'vacancies',
-      url: '/vacancies',
-    },
-    {
-      label: 'Blog',
-      value: 'blog',
-      url: '/blog',
-    },
-  ],
-};
 
 const MobileNavigation: FC = () => {
   const {
@@ -57,6 +16,7 @@ const MobileNavigation: FC = () => {
     setShowMobileNav,
     changeLanguage,
     activeLang,
+    headData: { headerData }
   } = useGlobalContext();
   const { pathname } = useRouter();
 
@@ -66,17 +26,17 @@ const MobileNavigation: FC = () => {
     setShowMobileNav(false);
   }, [pathname]);
 
-  const navLinkEls = data.navigation_items.map(item => {
+  const navLinkEls = headerData.menus.map(item => {
     return (
-      <Link href={item.url} title={item.label} key={item.value}>
+      <Link href={item.url} title={item.title} key={item.id}>
         <li 
-          aria-label={`Navigation link ${item.label}`} 
+          aria-label={item.title}
           className={classNames(
             classes.item, 
             { [classes.active]: pathname.includes(item.url) }
           )}
         >
-          {item.label}
+          {item.title}
         </li>
       </Link>
     );

@@ -1,47 +1,15 @@
+import { useHomeContext } from "@/contexts/HomeContext";
 import { FC, memo } from "react";
 import ServiceCard from "../ServiceCard/ServiceCard";
 import classes from './ServicesSection.module.scss';
 
-const ServiceCards = [
-  {
-    title: 'Frontend Development',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".',
-    url: '/services/:serviceId'
-  },
-  {
-    title: 'Frontend Development',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".',
-    url: '/services/:serviceId'
-  },
-  {
-    title: 'Frontend Development',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".',
-    url: '/services/:serviceId'
-  },
-  {
-    title: 'Frontend Development',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".',
-    url: '/services/:serviceId'
-  },
-  {
-    title: 'Frontend Development',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".',
-    url: '/services/:serviceId'
-  },
-  {
-    title: 'Frontend Development',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".',
-    url: '/services/:serviceId'
-  },
-];
-
 const ServicesSection: FC = () => {
-
-  const serviceEls = ServiceCards.map((item, index) => {
+  const { data } = useHomeContext();
+ 
+  const serviceEls = data?.services?.map((item) => {
     return (
       <ServiceCard 
-        url={item.url}
-        key={index}
+        key={item.id}
         title={item.title}
         description={item.description}
       />

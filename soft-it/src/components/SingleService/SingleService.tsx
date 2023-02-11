@@ -1,24 +1,71 @@
 import classNames from "classnames";
-import { FC, FormEvent, memo, useCallback, useState } from "react";
+import { FC, FormEvent, memo, useCallback, useEffect, useState } from "react";
+import { useTranslation } from "next-i18next";
 import CustomIcon from "../Common/CustomIcon";
 import Input, { CustomSelect, PhoneInput, TextField } from "../Common/Input";
 import classes from './SingleService.module.scss';
+import { IProjectType } from "@/interfaces/project.interface";
+import { fetchData } from '@/utils/fetch.utils';
+import { useGlobalContext } from "@/contexts/GlobalContext";
 
-const projectOptions = [
-  {
-    value: 'website',
-    label: 'Website',
-  }
-];
+interface SingleServiceProps {
+  serviceId: string;
+}
 
-const SingleService: FC = () => {
-  const [phoneCode, setPhoneCode] = useState('+998');
+const defaultForm = {
+  phone_number: '',
+  full_name: '',
+  company_name: '',
+  project_category_id: '',
+  phone_code: '+998',
+  description: ''
+};
+
+type IForm = typeof defaultForm;
+
+const SingleService: FC<SingleServiceProps> = () => {
+  const [form, setForm] = useState<IForm>(defaultForm);
+  const { t } = useTranslation();
+  const { activeLang } = useGlobalContext();
+  const [projectTypes, setProjectTypes] = useState<IProjectType[]>([]);
+
+  const onFormChange = useCallback((key: keyof IForm, val: any) => {
+    setForm(prev => ({
+      ...prev,
+      [key]: val
+    }));
+  }, []);
+
+  useEffect(() => {
+    fetchData<IProjectType[]>('/project-categories', activeLang)
+      .then(r => {
+        setProjectTypes(r);
+        onFormChange('project_category_id', r[0].id);
+      });
+  }, [activeLang]);
+
+  const projectOptions = projectTypes.map(type => ({
+    value: type.id.toString(),
+    label: type.title,
+  }));
 
   const onSubmitForm = useCallback(
-    (e: FormEvent<HTMLFormElement>) => {
+    async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-
-    }, []
+      await fetchData('/project-applications', activeLang, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          ...form,
+          project_category_id: +form.project_category_id,
+          phone_number: form.phone_code + form.phone_number
+        })
+      });
+      setForm(defaultForm);
+    }, [form]
   );
 
   return (
@@ -27,49 +74,59 @@ const SingleService: FC = () => {
         <div>
           <div className={classes.head}>
             <p className="text text--sub">
-              Do you have a project?
+              {t('contactTitle')}
             </p>
             <h1 className={classNames(classes.heading, "heading heading--3")}>
-              We have a solution for you.
+              {t('contactSubtitle')}
             </h1>
           </div>
           <div className={classes.formWrapper}>
             <p className={classNames(classes.textContainer, "text text--sub")}>
-              After you fill in this basic information, our responsible staff will contact you.
+              {t('contactWarning')}
             </p>
             <form onSubmit={onSubmitForm} className={classes.form}>
               <div className={classes.formContent}>
                 <Input
                   label="Enter Company Name"
                   placeholder="Your Company"
+                  value={form.company_name}
+                  onChange={(e) => onFormChange('company_name', e.target.value)}
                   required
                 />
                 <Input
-                  label="Enter Your Name"
-                  placeholder="Your Name"
+                  label={t('input.enter.name')!}
+                  placeholder={t('input.name')!}
+                  value={form.full_name}
+                  onChange={(e) => onFormChange('full_name', e.target.value)}
                   required
                 />
                 <PhoneInput 
                   phoneProps={{
-                    phoneCode,
-                    setPhoneCode,
+                    phoneCode: form.phone_code,
+                    setPhoneCode: (val) => onFormChange('phone_code', val),
                   }}
-                  label="Your Phone number"
+                  value={form.phone_number}
+                  onChange={(e) => onFormChange('phone_number', e.target.value)}
+                  label={t('input.enter.phone')!}
                   required
                 />
                 <CustomSelect
                   options={projectOptions}
-                  label="Type of project"
+                  label={t('projectType')!}
                   required
+                  value={form.project_category_id}
+                  onChange={(e) => onFormChange('project_category_id', e.target.value)}
                 />
                 <TextField 
+                  onChange={(e) => onFormChange('description', e.target.value)}
+                  value={form.description}
                   required
-                  placeholder="Write brief description of the project"
+                  placeholder={t('input.projectDescription')!}
                 />
               </div>
               <div className={classes.formFooter}>
                 <button className="btn btn--colored btn--rocket btn--outline" type="submit">
-                  Submit
+                  {t('submit')}
                   <CustomIcon name="rocket" />
                 </button>
               </div>

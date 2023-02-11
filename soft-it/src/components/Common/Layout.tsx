@@ -16,17 +16,21 @@ const AsyncMobileNavigation = dynamic(() =>
 );
 
 const Layout: FC<LayoutProps> = ({ children }) => {
-  const { media } = useGlobalContext();
+  const { media, headData } = useGlobalContext();
   return (
     <React.Fragment>
-      <SafeHydrate releaseContent>
-        {media.tablet
-          ? <AsyncMobileNavigation />
-          : <AsyncNavigation />
-        }
-      </SafeHydrate>
+      {headData.headerData && (
+        <SafeHydrate releaseContent>
+          {media.tablet
+            ? <AsyncMobileNavigation />
+            : <AsyncNavigation />
+          }
+        </SafeHydrate>
+      )}
       {children}
-      <Footer />
+      {headData.footerData && (
+        <Footer />
+      )}
     </React.Fragment>
   );
 };

@@ -8,58 +8,25 @@ import Logo from "../Common/Logo";
 import Dropdown from "../Dropdown/Dropdown";
 import classes from './Navigation.module.scss';
 import languages from "@/config/languages";
-import { useTranslation } from "react-i18next";
-
-const data = {
-  phone_number: {
-    label: '+99899 <span class="text--highlight">999 99 99</span>',
-    value: '+9989999999'
-  },
-  navigation_items: [
-    {
-      label: 'About Us',
-      value: 'about-us',
-      url: '/about',
-    },
-    {
-      label: 'Services',
-      value: 'services',
-      url: '/services',
-    },
-    {
-      label: 'Portfolio',
-      value: 'portfolio',
-      url: '/portfolio',
-    },
-    {
-      label: 'Vacancies',
-      value: 'vacancies',
-      url: '/vacancies',
-    },
-    {
-      label: 'Blog',
-      value: 'blog',
-      url: '/blog',
-    },
-  ],
-};
 
 const Navigation: FC = () => {
-  const { changeLanguage, activeLang, } = useGlobalContext();
+  const { changeLanguage, activeLang, headData } = useGlobalContext();
   const router = useRouter();
 
-  const navigationItemEls = data.navigation_items.map(item => {
+  const { headerData } = headData;
+
+  const navigationItemEls = headerData.menus.map(item => {
     return (
       <li
-        aria-label={item.label}
+        aria-label={item.title}
         className={classNames(
           classes.item,
           { [classes.active]: router.pathname.includes(item.url) }
         )}
-        key={item.value}
+        key={item.id}
       >
-        <Link href={item.url} title={item.label}>
-          {item.label}
+        <Link href={item.url} title={item.title}>
+          {item.title}
         </Link>
       </li>
      );
@@ -69,7 +36,7 @@ const Navigation: FC = () => {
     <header className={classes.nav}>
       <div className="container">
         <nav className={classes.content}>
-          <Link href="/" title="Home">
+          <Link href="/" title={headerData.company_info.logo_title}>
             <Logo className={classes.logo} />
           </Link>
           <div className={classes.group}>
@@ -77,10 +44,10 @@ const Navigation: FC = () => {
               {navigationItemEls}
             </ul>
             <a
-              href={`tel:${data.phone_number.value}`}
+              href={`tel:${headerData.company_info.phone_number}`}
               title="Our Phone Number" 
               className={classes.phone}
-              dangerouslySetInnerHTML={{ __html: data.phone_number.label }}
+              dangerouslySetInnerHTML={{ __html: headerData.company_info.phone_number }}
             />
             <Dropdown
               label={(

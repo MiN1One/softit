@@ -1,19 +1,39 @@
 import classNames from "classnames";
 import { FC, FormEvent, memo, useCallback, useState } from "react";
+import { useTranslation } from "next-i18next";
 import CustomIcon from "../Common/CustomIcon";
 import Input from "../Common/Input";
 import Moon from "../Common/Moon";
 import classes from './Contact.module.scss';
+import { useGlobalContext } from "@/contexts/GlobalContext";
+import { fetchData } from '@/utils/fetch.utils';
 
 const Contact: FC = () => {
   const [phone, setPhone] = useState('');
+  const { activeLang } = useGlobalContext();
   const [name, setName] = useState('');
+  const { t } = useTranslation();
 
   const onSubmitRequest = useCallback(
-    (e: FormEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-
-    }, []
+    async (e: FormEvent<HTMLFormElement>) => {
+      try {
+        e.preventDefault();
+        await fetchData('/applications', activeLang, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            full_name: name,
+            phone_number: phone
+          })
+        });
+        setPhone('');
+        setName('');
+      } catch (er) {
+        console.log('Submit error', er);
+      }
+    }, [phone, name, activeLang]
   );
 
   return (
@@ -24,18 +44,18 @@ const Contact: FC = () => {
             <Moon className={classes.moonImage} />
           </div>
           <h3 className="heading heading--3">
-            Do you have a project?
+            {t('contactTitle')}
           </h3>
           <p className="text text--sub">
-            We have a solution
+            {t('contactSubtitle')}
           </p>
-          <form className={classes.form}>
+          <form className={classes.form} onSubmit={onSubmitRequest}>
             <div className={classes.formContent}>
               <Input
                 onChange={(e) => setName(e.target.value)}
                 value={name}
                 type="text"
-                placeholder="Your name"
+                placeholder={t('input.name')!}
                 adjacentEl={<CustomIcon name="user" />}
                 required
               />
@@ -49,12 +69,11 @@ const Contact: FC = () => {
               />
             </div>
             <button
-              title="Submit the form"
+              title={t('submitTheForm')!}
               type="submit"
-              onSubmit={onSubmitRequest}
               className={classNames(classes.btn, "btn btn--colored")}
             >
-              Submit
+              {t('submit')}
             </button>
           </form>
         </div>

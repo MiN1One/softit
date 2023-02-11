@@ -6,6 +6,7 @@ import image3 from '@assets/images/image3.png';
 import image4 from '@assets/images/image4.png';
 import classNames from "classnames";
 import { useTranslation } from "next-i18next";
+import { useHomeContext } from "@/contexts/HomeContext";
 
 const cardItems = [
   {
@@ -32,22 +33,25 @@ const cardItems = [
 
 const AboutSection: FC = () => {
   const { t } = useTranslation();
+  const { data } = useHomeContext();
 
-  const cardEls = cardItems.map((card, index) => {
+  const cardEls = data.about.images.map((card, index) => {
     return (
-      <div key={index} tabIndex={0} className={classes.card}>
+      <div key={card.id || index} tabIndex={0} className={classes.card}>
         <figure className={classes.figure}>
           <img
-            src={card.image}
-            alt={`Card image ${card.label}`}
+            src={card.image_url}
+            alt={`Card image ${card.title}`}
             width="100%"
             height="100%"
           />
         </figure>
         <div className={classes.cardContent}>
-          <a href={card.url} className="btn btn--colored" title={card.label}>
-            {card.label}
-          </a>
+          {card.url && (
+            <a href={card.url} className="btn btn--colored" title={card.title}>
+              {card.title}
+            </a>
+          )}
         </div>
       </div>
     );
@@ -60,7 +64,7 @@ const AboutSection: FC = () => {
           {t('about')}
         </h3>
         <p className={classNames(classes.text, "text text--sub")}>
-          The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum"
+          {data.about.short_description}
         </p>
         <div className={classes.cards}>
           {cardEls}

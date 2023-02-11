@@ -1,4 +1,34 @@
 {
   "designed": "Designed By",
-  "about": "About Us"
+  "about": "About Us",
+  "viewMore": "View More",
+  "allProjects": "All Projects",
+  "partners": "Our Partners",
+  "portfolio": "Portfolio",
+  "contactTitle": "Do you have a project?",
+  "contactSubtitle": "We have a solution",
+  "submit": "Submit",
+  "ourPortfolio": "Our portfolio",
+  "callUs": "Call us",
+  "ourServices": "Our Services",
+  "forAny": "For any business",
+  "ctaTitle": "We offer best digital<0 /> solutions for your business",
+  "submitTheForm": "Submit the form",
+  "bannerTitle": "You can be part of<0 /> our team",
+  "bannerSubtitle": "Want to grow with us? Then join us.",
+  "teamPhotos": "Photos from our team",
+  "aboutPhotoDescription": "All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.",
+  "contactWarning": "After you fill in this basic information, our responsible staff will contact you.",
+  "projectType": "Type of project",
+  "input": {
+    "phone": "Your phone number",
+    "name": "Your name",
+    "company": "Company",
+    "projectDescription": "Write brief description of the project",
+    "enter": {
+      "name": "Enter your name",
+      "phone": "Enter your number",
+      "company": "Enter your company"
+    }
+  }
 }

@@ -1,25 +1,25 @@
+import AboutContainer from "@/components/AboutContainer/AboutContainer";
 import Layout from "@/components/Common/Layout";
-import ServicesContainer from "@/components/ServicesContainer/ServicesContainer";
+import { IAboutPageData } from "@/interfaces/about.interface";
 import { fetchData, fetchMainData } from "@/utils/fetch.utils";
 import { GetStaticProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { IService } from '@/interfaces/service.interface';
 
-interface ServicesPageProps {
-  services: IService[];
+interface AboutPageProps {
+  about: IAboutPageData;
 }
 
-const ServicesPage: NextPage<ServicesPageProps> = ({ services }) => (
+const About: NextPage<AboutPageProps> = (props) => (
   <Layout>
     <main>
-      <ServicesContainer data={services} />
+      <AboutContainer data={props.about} />
     </main>
   </Layout>
 );
 
-export const getStaticProps: GetStaticProps<ServicesPageProps> = async (ctx) => {
+export const getStaticProps: GetStaticProps<AboutPageProps> = async (ctx) => {
   const locale = ctx.locale || ctx.defaultLocale || 'uz';
-  const services = await fetchData('/services', locale);
+  const about = await fetchData('/about', locale);
   const translations = await serverSideTranslations(locale);
   const headData = await fetchMainData(locale);
 
@@ -27,10 +27,10 @@ export const getStaticProps: GetStaticProps<ServicesPageProps> = async (ctx) => 
     props: {
       ...translations,
       headData,
-      services,
+      about: about?.[0],
     },
     revalidate: 200,
   };
 };
 
-export default ServicesPage
+export default About;

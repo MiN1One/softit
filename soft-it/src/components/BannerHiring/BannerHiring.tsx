@@ -3,42 +3,22 @@ import classes from './BannerHiring.module.scss';
 import emoji from '@assets/images/Winking Face.png';
 import classNames from "classnames";
 import Link from "next/link";
-
-
-const hiringTags = [
-  {
-    url: '/',
-    label: 'Frontend — VueJS, Javascript'
-  },
-  {
-    url: '/',
-    label: 'Frontend — VueJS, Javascript'
-  },
-  {
-    url: '/',
-    label: 'Frontend — VueJS, Javascript'
-  },
-  {
-    url: '/',
-    label: 'Frontend — VueJS, Javascript'
-  },
-  {
-    url: '/',
-    label: 'Frontend — VueJS, Javascript'
-  },
-];
+import { useHomeContext } from "@/contexts/HomeContext";
+import { Trans, useTranslation } from "next-i18next";
 
 const BannerHiring: FC = () => {
+  const { data } = useHomeContext();
+  const { t } = useTranslation();
 
-  const hiringTagEls = hiringTags.map((item, index) => {
+  const hiringTagEls = data.hot_vacancies.map((item, index) => {
     return (
       <li
         key={index}
         className={classNames(classes.tag, 'btn btn--outline')}
-        aria-label={item.label}
+        aria-label={item.title}
       >
-        <Link href={item.url} title={item.label}>
-          {item.label}
+        <Link href={`/vacancies/${item.id}`} title={item.title}>
+          {item.title}
         </Link>
       </li>
     );
@@ -50,7 +30,7 @@ const BannerHiring: FC = () => {
         <div className={classes.content}>
           <div>
             <h4 className={classNames(classes.heading, "heading heading--3")}>
-              You can be part of<br/> our team
+              <Trans i18nKey="bannerTitle" components={[<br />]} />
               <img 
                 alt="Emoji"
                 src={emoji.src}
@@ -59,7 +39,7 @@ const BannerHiring: FC = () => {
               />
             </h4>
             <p className="text text--sub">
-              Want to grow with us? Then join us.
+              {t('bannerSubtitle')}
             </p>
           </div>
           <ul className={classes.tags}>
