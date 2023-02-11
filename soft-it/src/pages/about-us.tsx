@@ -19,9 +19,12 @@ const About: NextPage<AboutPageProps> = (props) => (
 
 export const getStaticProps: GetStaticProps<AboutPageProps> = async (ctx) => {
   const locale = ctx.locale || ctx.defaultLocale || 'uz';
-  const about = await fetchData('/about', locale);
-  const translations = await serverSideTranslations(locale);
-  const headData = await fetchMainData(locale);
+  
+  const [about, translations, headData] = await Promise.all([
+    fetchData('/about', locale),
+    serverSideTranslations(locale),
+    fetchMainData(locale),
+  ]);
 
   return {
     props: {

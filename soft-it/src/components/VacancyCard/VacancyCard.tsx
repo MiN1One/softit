@@ -29,19 +29,17 @@ const VacancyCard: FC<VacancyCardProps> = (props) => {
         <div className={classes.body}>
           <span className={classes.infoGroup}>
             <CustomIcon name="calendar" />
-            {vacancy.days}
+            {vacancy.working_days}
           </span>
           <span className={classes.infoGroup}>
             <CustomIcon name="clock" />
-            {parseInt(vacancy.time.from).toFixed(2)} -&nbsp;
-            {parseInt(vacancy.time.to).toFixed(2)}
+            {vacancy.working_hours}
           </span>
         </div>
         <div className={classes.footer}>
           <span className={classNames(classes.salary, classes.infoGroup)}>
             <CustomIcon name="coin" />
-            {vacancy.salaryRange.from} -&nbsp;
-            {vacancy.salaryRange.to}
+            {vacancy.salary}
           </span>
           <CustomIcon className={classes.arrow} name="arrow" />
         </div> 

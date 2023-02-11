@@ -10,53 +10,58 @@ import { useHomeContext } from "@/contexts/HomeContext";
 interface PortfolioProps {
   asSection?: boolean;
   projects?: IProject[];
+  plainLayout?: boolean;
 }
 
 const Portfolio: FC<PortfolioProps> = (props) => {
-  const { projects = [], asSection = false } = props;
+  const { projects = [], asSection = false, plainLayout = false } = props;
   const { data } = useHomeContext();
   const { t } = useTranslation();
 
   const projectItems = asSection && data.portfolio ? data.portfolio : projects;
   
-  const portfolioEls = projectItems.map((item, index) => {
-    return (
-      <Link
-        className={classes.card}
-        key={index}
-        href={item.link}
-        title={item.title}
-      >
-        <figure className={classes.figure}>
-          <img
-            src={item.image_url}
-            alt={`Portfiolio ${item.title}`}
-            width="100%"
-            height="100%"
-          />
-        </figure>
-        <div className={classes.cardContent}>
-          <div className={classes.cardHead}>
-            <span 
-              className="text--lg text text--bold text--light"
-            >
-              {item.title}
-            </span>
-            <span className="text text--sub">{item.category_name}</span>
-          </div>
-          <div className={classes.cardActions}>
-            <div className={classes.cardLink}>
-              {t('viewMore')}
-              <CustomIcon name="arrow" />
+  const portfolioEls = (plainLayout ? projectItems : projectItems.slice(0, 7))
+    .map((item, index) => {
+      return (
+        <Link
+          className={classes.card}
+          key={index}
+          href={item.link}
+          title={item.title}
+        >
+          <figure className={classes.figure}>
+            <img
+              src={item.image_url}
+              alt={`Portfiolio ${item.title}`}
+              width="100%"
+              height="100%"
+            />
+          </figure>
+          <div className={classes.cardContent}>
+            <div className={classes.cardHead}>
+              <span 
+                className="text--lg text text--bold text--light"
+              >
+                {item.title}
+              </span>
+              <span className="text text--sub">{item.category_name}</span>
+            </div>
+            <div className={classes.cardActions}>
+              <div className={classes.cardLink}>
+                {t('viewMore')}
+                <CustomIcon name="arrow" />
+              </div>
             </div>
           </div>
-        </div>
-      </Link>
-    );
-  });
+        </Link>
+      );
+    });
 
   return (
-    <section className={classes.portfolio}>
+    <section className={classNames(
+      classes.portfolio, 
+      { [classes.plain]: plainLayout }
+    )}>
       <div className="container">
         {asSection && (
           <h3 className="heading heading--3">

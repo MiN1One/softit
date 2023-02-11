@@ -4,8 +4,8 @@ import classes from './Tags.module.scss';
 
 interface TagsProps {
   items: string[];
-  onClickTag: (tag: string) => void;
-  activeTag?: string;
+  onClickTag: (tag: any) => void;
+  activeTag?: any;
 }
 
 const Tags: FC<TagsProps> = (props) => {

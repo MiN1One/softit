@@ -28,16 +28,15 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
   });
   const paths = (await Promise.all(promises)).flat();
 
-  return {
-    paths,
-    fallback: false,
-  };
+  return { paths, fallback: false, };
 };
 
 export const getStaticProps: GetStaticProps<ServicePageProps> = async (ctx) => {
   const locale = ctx.locale || ctx.defaultLocale || 'uz';
-  const translations = await serverSideTranslations(locale);
-  const headData = await fetchMainData(locale);
+  const [translations, headData] = await Promise.all([
+    serverSideTranslations(locale),
+    fetchMainData(locale),
+  ]);
 
   return {
     props: {

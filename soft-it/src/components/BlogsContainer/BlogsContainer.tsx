@@ -1,75 +1,40 @@
-import { IBlog } from "@/interfaces/blog.interface";
+import { IBlog, IBlogCategory } from "@/interfaces/blog.interface";
 import classNames from "classnames";
-import { FC, memo, useState } from "react";
+import { FC, memo, useEffect, useState } from "react";
 import Tags from "../Tags/Tags";
 import classes from './BlogsContainer.module.scss';
-import image from '@assets/images/Rectangle 37.png';
 import BlogCard from "../BlogCard/BlogCard";
+import { useTranslation } from "next-i18next";
 
-const tagItems = ['all', 'Holidy', 'News', 'Development'];
-const blogs: IBlog[] = [
-  {
-    title: 'Next achievement of Soft IT Group',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. ',
-    html: '',
-    updatedAt: '2023-01-29T05:28:06.413Z',
-    views: 125,
-    image: image.src,
-    id: '1'
-  },
-  {
-    title: 'Next achievement of Soft IT Group',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. ',
-    html: '',
-    updatedAt: '2023-01-29T05:28:06.413Z',
-    views: 125,
-    image: image.src,
-    id: '1'
-  },
-  {
-    title: 'Next achievement of Soft IT Group',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. ',
-    html: '',
-    updatedAt: '2023-01-29T05:28:06.413Z',
-    views: 125,
-    image: image.src,
-    id: '1'
-  },
-  {
-    title: 'Next achievement of Soft IT Group',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. ',
-    html: '',
-    updatedAt: '2023-01-29T05:28:06.413Z',
-    views: 125,
-    image: image.src,
-    id: '1'
-  },
-  {
-    title: 'Next achievement of Soft IT Group',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. ',
-    html: '',
-    updatedAt: '2023-01-29T05:28:06.413Z',
-    views: 125,
-    image: image.src,
-    id: '1'
-  },
-  {
-    title: 'Next achievement of Soft IT Group',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. ',
-    html: '',
-    updatedAt: '2023-01-29T05:28:06.413Z',
-    views: 125,
-    image: image.src,
-    id: '1'
-  },
-];
+interface BlogsContainerProps {
+  blogs: IBlog[];
+  blogCategories: IBlogCategory[];
+}
 
-const BlogsContainer: FC = () => {
-  const [activeTag, setActiveTag] = useState('all');
+const BlogsContainer: FC<BlogsContainerProps> = (props) => {
+  const { t } = useTranslation();
+  const { blogs, blogCategories, } = props;
 
-  const blogEls = blogs.map((blog, index) => {
+  const allBlogsType = t('all');
+  const [activeTag, setActiveTag] = useState<string>(allBlogsType);
+  const [filteredBlogs, setFilteredBlogs] = useState<IBlog[]>([]);
+
+  const tagItems = [allBlogsType, ...blogCategories.map(({ title }) => title)];
+
+  useEffect(() => {
+    if (activeTag === allBlogsType) {
+      setFilteredBlogs(blogs);
+    } else {
+      const filteredBlogs = blogs.filter(({ blog_category_title }) => (
+        blog_category_title === activeTag
+      ));
+      setFilteredBlogs(filteredBlogs);
+    }
+  }, [activeTag, tagItems, allBlogsType]);
+
+  const blogEls = filteredBlogs.map((blog) => {
     return (
-      <BlogCard key={index} blog={blog} />
+      <BlogCard key={blog.id} blog={blog} />
     );
   });
 
@@ -78,7 +43,7 @@ const BlogsContainer: FC = () => {
       <div className="container">
         <div className="page-section__head">
           <h1 className="heading heading--xlg">
-            Blog
+            {t('blog')}
           </h1>
         </div>
         <div className="page-section__body">

@@ -15,5 +15,24 @@
   "forAny": "forAny",
   "callUs": "callUs",
   "ourPortfolio": "ourPortfolio",
-  "bannerSubtitle": "bannerSubtitle"
+  "bannerSubtitle": "bannerSubtitle",
+  "vacancies": "vacancies",
+  "top7": "top7",
+  "input": {
+    "name": "input.name",
+    "enter": {
+      "name": "input.enter.name",
+      "cv": "input.enter.cv"
+    },
+    "phone": "input.phone",
+    "cv": "input.cv"
+  },
+  "vacancy": "vacancy",
+  "requirements": "requirements",
+  "tasks": "tasks",
+  "conditions": "conditions",
+  "sendResume": "sendResume",
+  "all": "all",
+  "blog": "blog",
+  "exploreUs": "exploreUs"
 }

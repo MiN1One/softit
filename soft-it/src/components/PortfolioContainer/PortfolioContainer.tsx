@@ -1,19 +1,43 @@
+import { IProject, IProjectType } from "@/interfaces/project.interface";
 import classNames from "classnames";
-import { FC, memo, useState } from "react";
+import { FC, memo, useEffect, useState } from "react";
+import { useTranslation } from "next-i18next";
 import Portfolio from "../Portfolio/Portfolio";
 import Tags from "../Tags/Tags";
 import classes from './PortfolioContainer.module.scss';
 
-const tagItems = ['all', 'Mobile App', 'CRM', 'Webstite'];
+interface PortfolioContainerProps {
+  projects: IProject[];
+  projectCategories: IProjectType[];
+}
 
-const PortfolioContainer: FC = () => {
-  const [activeTag, setActiveTag] = useState('all');
+const PortfolioContainer: FC<PortfolioContainerProps> = (props) => {
+  const { projects, projectCategories } = props;
+  const { t } = useTranslation();
+  
+  const allProjectsTag = t('top7');
+  const [activeTag, setActiveTag] = useState<string>(allProjectsTag);
+
+  const tagItems = [allProjectsTag, ...projectCategories.map(({ title }) => title)];
+
+  const [filteredProjects, setFilteredProjects] = useState<IProject[]>([]);
+
+  useEffect(() => {
+    if (activeTag === allProjectsTag) {
+      setFilteredProjects(projects);
+    } else {
+      const filteredProjects = projects.filter(project => (
+        project.category_name === activeTag
+      ));
+      setFilteredProjects(filteredProjects);
+    }
+  }, [activeTag, allProjectsTag]);
 
   return (
     <section className={classNames("page-section", classes.portfolio)}>
       <div className="page-section__head">
         <h1 className="heading heading--xlg">
-          Portfolio
+          {t('portfolio')}
         </h1>
       </div>
       <div className="page-section__body">
@@ -24,7 +48,10 @@ const PortfolioContainer: FC = () => {
             activeTag={activeTag}
           />
         </div>
-        <Portfolio />
+        <Portfolio 
+          plainLayout={activeTag !== allProjectsTag}
+          projects={filteredProjects}
+        />
       </div>
     </section>
   );

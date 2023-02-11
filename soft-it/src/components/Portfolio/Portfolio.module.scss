@@ -24,7 +24,9 @@
     width: 100%;
     border-radius: 1rem;
     overflow: hidden;
+  }
 
+  &:not(.plain) .card {
     &:first-child {
       grid-row: 1 / 3;
     }

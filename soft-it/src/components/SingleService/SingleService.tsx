@@ -52,7 +52,7 @@ const SingleService: FC<SingleServiceProps> = () => {
   const onSubmitForm = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      await fetchData('/project-applications', activeLang, {
+      const result = await fetchData('/project-applications', activeLang, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,7 +64,9 @@ const SingleService: FC<SingleServiceProps> = () => {
           phone_number: form.phone_code + form.phone_number
         })
       });
-      setForm(defaultForm);
+      if (result) {
+        setForm(defaultForm);
+      }
     }, [form]
   );
 

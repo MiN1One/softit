@@ -18,7 +18,7 @@ const Contact: FC = () => {
     async (e: FormEvent<HTMLFormElement>) => {
       try {
         e.preventDefault();
-        await fetchData('/applications', activeLang, {
+        const result = await fetchData('/applications', activeLang, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -28,8 +28,10 @@ const Contact: FC = () => {
             phone_number: phone
           })
         });
-        setPhone('');
-        setName('');
+        if (result) {
+          setPhone('');
+          setName('');
+        }
       } catch (er) {
         console.log('Submit error', er);
       }

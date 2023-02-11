@@ -19,9 +19,12 @@ const ServicesPage: NextPage<ServicesPageProps> = ({ services }) => (
 
 export const getStaticProps: GetStaticProps<ServicesPageProps> = async (ctx) => {
   const locale = ctx.locale || ctx.defaultLocale || 'uz';
-  const services = await fetchData('/services', locale);
-  const translations = await serverSideTranslations(locale);
-  const headData = await fetchMainData(locale);
+  
+  const [services, translations, headData] = await Promise.all([
+    fetchData('/services', locale),
+    serverSideTranslations(locale),
+    fetchMainData(locale),
+  ]);
 
   return {
     props: {

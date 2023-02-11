@@ -10,5 +10,6 @@ module.exports = {
   saveMissing: isDev,
   updateMissing: isDev,
   defaultNS: 'common',
+  load: 'currentOnly',
   reloadOnPrerender: isDev,
 };

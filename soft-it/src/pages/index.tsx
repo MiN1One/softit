@@ -36,16 +36,20 @@ export default function Home({ indexData }: HomePageProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps<HomePageProps> = async (context) => {
-  const locale = context.locale || context.defaultLocale || 'uz';
-  const translations = await serverSideTranslations(locale);
-  const headData = await fetchMainData(locale);
-  const indexData = await fetchData('/index', locale);
+export const getStaticProps: GetStaticProps<HomePageProps> = async (ctx) => {
+  const locale = ctx.locale || ctx.defaultLocale || 'uz';
+  const [translations, headData, indexData] = await Promise.all([
+    serverSideTranslations(locale),
+    fetchMainData(locale),
+    fetchData('/index', locale)
+  ]);
+
   return {
     props: {
       ...translations,
       indexData,
       headData
-    }
+    },
+    revalidate: 100
   };
 };

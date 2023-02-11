@@ -182,10 +182,9 @@ export const TextField: FC<
       <textarea 
         {...restProps}
         readOnly={props.readOnly || (!props.onChange && Boolean(props.value))}
-        className="input-group__text" 
-      >
-        {value}
-      </textarea>
+        className="input-group__text"
+        value={value}
+      />
     </InputSkeleton>
   );
 };

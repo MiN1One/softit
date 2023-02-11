@@ -1,15 +1,38 @@
 import Layout from "@/components/Common/Layout";
 import VacanciesContainer from "@/components/VacanciesContainer/VacanciesContainer";
-import { NextPage } from "next";
+import { IVacancy } from "@/interfaces/vacancies.interface";
+import { fetchData, fetchMainData } from "@/utils/fetch.utils";
+import { GetStaticProps, NextPage } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-const VacanciesPage: NextPage = () => {
-  return (
-    <Layout>
-      <main>
-        <VacanciesContainer />
-      </main>
-    </Layout>
-  );
+interface VacanciesPageProps {
+  vacancies: IVacancy[];
+}
+
+const VacanciesPage: NextPage<VacanciesPageProps> = (props) => (
+  <Layout>
+    <main>
+      <VacanciesContainer vacancies={props.vacancies} />
+    </main>
+  </Layout>
+);
+
+export const getStaticProps: GetStaticProps<VacanciesPageProps> = async (ctx) => {
+  const locale = ctx.locale || ctx.defaultLocale || 'uz';
+  const [translations, headData, vacancies] = await Promise.all([
+    serverSideTranslations(locale),
+    fetchMainData(locale),
+    fetchData('/vacancies', locale)
+  ]);
+
+  return {
+    props: {
+      ...translations,
+      vacancies,
+      headData
+    },
+    revalidate: 100
+  };
 };
 
 export default VacanciesPage;

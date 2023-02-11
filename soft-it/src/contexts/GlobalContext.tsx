@@ -41,7 +41,10 @@ export const GlobalContextProvider: FC<GlobalContextProviderProps> =
       if (activeLang === lang) return;
       await i18n.changeLanguage(lang);
       await router.push(
-        router.pathname, 
+        {
+          pathname: router.pathname,
+          query: { ...router.query, }
+        }, 
         undefined, 
         { locale: lang, }
       );

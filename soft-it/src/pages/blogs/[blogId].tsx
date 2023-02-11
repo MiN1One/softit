@@ -1,32 +1,30 @@
 import Layout from "@/components/Common/Layout";
-import SingleVacancy from "@/components/SingleVacancy/SingleVacancy";
-import { IVacancy } from "@/interfaces/vacancies.interface";
+import SingleBlog from "@/components/SingleBlog/SingleBlog";
+import { IBlog, ISingleBlog } from "@/interfaces/blog.interface";
 import { fetchData, fetchMainData } from "@/utils/fetch.utils";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-interface SingleVacancyPageProps {
-  vacancy: IVacancy;
+interface SinglePageProps {
+  blog: ISingleBlog;
 }
 
-const SingleVacancyPage: NextPage<SingleVacancyPageProps> = (props) => (
+const SingleBlogPage: NextPage<SinglePageProps> = (props) => (
   <Layout>
     <main>
-      <SingleVacancy vacancy={props.vacancy} />
+      <SingleBlog 
+        blog={props.blog.blog}
+        recommended={props.blog.recommended}
+      />
     </main>
   </Layout>
 );
 
 export const getStaticPaths: GetStaticPaths = async ({ locales = [] }) => {
   const promises = locales.map(async locale => {
-    const vacancies = await fetchData<IVacancy[]>(
-      '/vacancies/available_vacancies/', 
-      locale
-    );
-    return vacancies.map(vacancy => ({
-      params: {
-        vacancyId: vacancy.id.toString()
-      },
+    const blogs = await fetchData<IBlog[]>('/blogs', locale);
+    return blogs.map(({ id }) => ({
+      params: { blogId: id.toString() },
       locale
     }));
   });
@@ -34,22 +32,23 @@ export const getStaticPaths: GetStaticPaths = async ({ locales = [] }) => {
   return { paths, fallback: false };
 };
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getStaticProps: GetStaticProps<SinglePageProps> = async (ctx) => {
   const locale = ctx.locale || ctx.defaultLocale || 'uz';
-  const [translations, headData, vacancy] = await Promise.all([
+
+  const [translations, headData, blog] = await Promise.all([
     serverSideTranslations(locale),
     fetchMainData(locale),
-    fetchData('/vacancies/' + ctx.params?.vacancyId, locale)
+    fetchData('/blogs/' + ctx.params?.blogId, locale)
   ]);
 
   return {
     props: {
       ...translations,
       headData,
-      vacancy,
+      blog
     },
     revalidate: 200,
   };
 };
 
-export default SingleVacancyPage;
+export default SingleBlogPage;

@@ -1,158 +1,19 @@
 import { IVacancy } from "@/interfaces/vacancies.interface";
 import classNames from "classnames";
 import { FC, memo } from "react";
+import { useTranslation } from "next-i18next";
 import VacancyCard from "../VacancyCard/VacancyCard";
 import classes from './VacanciesContainer.module.scss';
 
-const vacancyItems: IVacancy[] = [
-  {
-    title: 'Frontend Developer',
-    time: {
-      from: '9',
-      to: '18'
-    },
-    salaryRange: {
-      from: 8_000_000,
-      to: 12_000_000
-    },
-    id: '1',
-    tasks: [],
-    requirements: [],
-    days: 'Monday - Saturday',
-    conditions: []
-  },
-  {
-    title: 'Frontend Developer',
-    time: {
-      from: '9',
-      to: '18'
-    },
-    salaryRange: {
-      from: 8_000_000,
-      to: 12_000_000
-    },
-    id: '1',
-    tasks: [],
-    requirements: [],
-    days: 'Monday - Saturday',
-    conditions: []
-  },
-  {
-    title: 'Frontend Developer',
-    time: {
-      from: '9',
-      to: '18'
-    },
-    salaryRange: {
-      from: 8_000_000,
-      to: 12_000_000
-    },
-    id: '1',
-    tasks: [],
-    requirements: [],
-    days: 'Monday - Saturday',
-    conditions: []
-  },
-  {
-    title: 'Frontend Developer',
-    time: {
-      from: '9',
-      to: '18'
-    },
-    salaryRange: {
-      from: 8_000_000,
-      to: 12_000_000
-    },
-    id: '1',
-    tasks: [],
-    requirements: [],
-    days: 'Monday - Saturday',
-    conditions: []
-  },
-  {
-    title: 'Frontend Developer',
-    time: {
-      from: '9',
-      to: '18'
-    },
-    salaryRange: {
-      from: 8_000_000,
-      to: 12_000_000
-    },
-    id: '1',
-    tasks: [],
-    requirements: [],
-    days: 'Monday - Saturday',
-    conditions: []
-  },
-  {
-    title: 'Frontend Developer',
-    time: {
-      from: '9',
-      to: '18'
-    },
-    salaryRange: {
-      from: 8_000_000,
-      to: 12_000_000
-    },
-    id: '1',
-    tasks: [],
-    requirements: [],
-    days: 'Monday - Saturday',
-    conditions: []
-  },
-  {
-    title: 'Frontend Developer',
-    time: {
-      from: '9',
-      to: '18'
-    },
-    salaryRange: {
-      from: 8_000_000,
-      to: 12_000_000
-    },
-    id: '1',
-    tasks: [],
-    requirements: [],
-    days: 'Monday - Saturday',
-    conditions: []
-  },
-  {
-    title: 'Frontend Developer',
-    time: {
-      from: '9',
-      to: '18'
-    },
-    salaryRange: {
-      from: 8_000_000,
-      to: 12_000_000
-    },
-    id: '1',
-    tasks: [],
-    requirements: [],
-    days: 'Monday - Saturday',
-    conditions: []
-  },
-  {
-    title: 'Frontend Developer',
-    time: {
-      from: '9',
-      to: '18'
-    },
-    salaryRange: {
-      from: 8_000_000,
-      to: 12_000_000
-    },
-    id: '1',
-    tasks: [],
-    requirements: [],
-    days: 'Monday - Saturday',
-    conditions: []
-  },
-];
+interface VacanciesContainerProps {
+  vacancies: IVacancy[];
+}
 
-const VacanciesContainer: FC = () => {
-  const vacancyCardEls = vacancyItems.map((vacancy, index) => {
+const VacanciesContainer: FC<VacanciesContainerProps> = (props) => {
+  const { vacancies } = props;
+  const { t } = useTranslation();
+
+  const vacancyCardEls = vacancies.map((vacancy, index) => {
     return (
       <VacancyCard key={index} vacancy={vacancy} />
     );
@@ -163,7 +24,7 @@ const VacanciesContainer: FC = () => {
       <div className="container">
         <div className="page-section__head">
           <h1 className="heading heading--xlg">
-            Vacancies
+            {t('vacancies')}
           </h1>
         </div>
         <div className={classNames(
