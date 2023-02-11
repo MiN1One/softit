@@ -6,7 +6,10 @@ import { appWithTranslation } from 'next-i18next';
 
 function App({ Component, pageProps }: AppProps) {
   return (
-    <GlobalContextProvider headData={pageProps.headData}>
+    <GlobalContextProvider 
+      meta={pageProps.meta} 
+      headData={pageProps.headData}
+    >
       <Component {...pageProps} />
     </GlobalContextProvider>
   );

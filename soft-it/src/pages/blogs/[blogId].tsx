@@ -38,14 +38,18 @@ export const getStaticProps: GetStaticProps<SinglePageProps> = async (ctx) => {
   const [translations, headData, blog] = await Promise.all([
     serverSideTranslations(locale),
     fetchMainData(locale),
-    fetchData('/blogs/' + ctx.params?.blogId, locale)
+    fetchData<ISingleBlog>('/blogs/' + ctx.params?.blogId, locale)
   ]);
 
   return {
     props: {
       ...translations,
       headData,
-      blog
+      blog,
+      meta: {
+        title: blog.blog.title,
+        description: blog.blog.description.slice(0, 1000)
+      }
     },
     revalidate: 200,
   };

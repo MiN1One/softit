@@ -43,6 +43,7 @@ export const getStaticProps: GetStaticProps<ServicePageProps> = async (ctx) => {
       ...translations,
       headData,
       serviceId: ctx?.params?.serviceId as string,
+      meta: 'service'
     },
     revalidate: 200,
   };

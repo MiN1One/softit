@@ -1,9 +1,10 @@
 import useMedia from "@/hooks/useMedia";
-import { IHeadData } from "@/interfaces/common.interface";
+import { IHeadData, PageMeta } from "@/interfaces/common.interface";
 import { useRouter } from "next/router";
 import { createContext, FC, useCallback, useContext, useState } from "react";
 import { useTranslation } from "next-i18next";
 import { StateSetter } from "@/interfaces/utils.interface";
+import PageHead from "@/components/Common/PageHead";
 
 interface IGlobalContext {
   activeLang: string;
@@ -17,6 +18,7 @@ interface IGlobalContext {
 
 interface GlobalContextProviderProps {
   children: React.ReactNode;
+  meta?: PageMeta;
   headData: IHeadData;
 }
 
@@ -25,7 +27,7 @@ const globalContext = createContext({} as IGlobalContext);
 export const useGlobalContext = () => useContext(globalContext);
 
 export const GlobalContextProvider: FC<GlobalContextProviderProps> = 
-  ({ children, headData: headDataProp }) => {
+  ({ children, headData: headDataProp, meta }) => {
     const [showMobileNav, setShowMobileNav] = useState(false);
     const media = useMedia(
       ['mobile', 'only screen and (max-width: 48em)'],
@@ -35,7 +37,7 @@ export const GlobalContextProvider: FC<GlobalContextProviderProps> =
     const router = useRouter();
     const activeLang = router.locale || 'uz';
     const [headData, setHeadData] = useState<IHeadData>(headDataProp || {});
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
     
     const changeLanguage = useCallback(async (lang: string) => {
       if (activeLang === lang) return;
@@ -60,10 +62,23 @@ export const GlobalContextProvider: FC<GlobalContextProviderProps> =
       setHeadData,
       headData,
     };
-    
-    return (
+
+    let content = (
       <globalContext.Provider value={state}>
         {children}
       </globalContext.Provider>
     );
+
+    if (meta) {
+      const isObject = typeof meta === 'object';
+      const title = isObject ? meta.title : t(`meta.${meta}.title`);
+      const description = isObject ? meta.description : t(`meta.${meta}.description`);
+      content = (
+        <PageHead title={title} description={description}>
+          {content}
+        </PageHead>
+      );
+    }
+    
+    return content;
   };

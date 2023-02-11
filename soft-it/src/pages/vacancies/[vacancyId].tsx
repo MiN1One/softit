@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const [translations, headData, vacancy] = await Promise.all([
     serverSideTranslations(locale),
     fetchMainData(locale),
-    fetchData('/vacancies/' + ctx.params?.vacancyId, locale)
+    fetchData<IVacancy>('/vacancies/' + ctx.params?.vacancyId, locale)
   ]);
 
   return {
@@ -47,6 +47,10 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       ...translations,
       headData,
       vacancy,
+      meta: {
+        title: vacancy.title,
+        description: vacancy.title
+      }
     },
     revalidate: 200,
   };

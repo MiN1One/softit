@@ -29,6 +29,36 @@
   "aboutPhotoDescription": "All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.",
   "contactWarning": "After you fill in this basic information, our responsible staff will contact you.",
   "projectType": "Type of project",
+  "meta": {
+    "index": {
+      "title": "Soft IT",
+      "description": "This is meta description for home page"
+    },
+    "about": {
+      "title": "About Us",
+      "description": "This is meta description for about us page"
+    },
+    "portfolio": {
+      "title": "Our portfolio",
+      "description": "This is meta description for portfolio page"
+    },
+    "services": {
+      "title": "Our Services",
+      "description": "This is meta description for services page"
+    },
+    "service": {
+      "title": "Submit your project",
+      "description": "Submit your project we will respond you back in a bit"
+    },
+    "vacancies": {
+      "title": "Open vacancies",
+      "description": "This is meta description for vacancies page"
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "This is meta description for blog page"
+    }
+  },
   "input": {
     "phone": "Your phone number",
     "name": "Your name",

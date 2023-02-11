@@ -31,6 +31,7 @@ export const getStaticProps: GetStaticProps<ServicesPageProps> = async (ctx) => 
       ...translations,
       headData,
       services,
+      meta: 'services'
     },
     revalidate: 200,
   };

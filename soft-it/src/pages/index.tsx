@@ -1,6 +1,7 @@
 import AboutSection from "@/components/AboutSection/AboutSection";
 import BannerHiring from "@/components/BannerHiring/BannerHiring";
 import Layout from "@/components/Common/Layout";
+import PageHead from "@/components/Common/PageHead";
 import Contact from "@/components/Contact/Contact";
 import CtaGroup from "@/components/CtaGroup/CtaGroup";
 import Hero from "@/components/Hero/Hero";
@@ -8,12 +9,13 @@ import PartnersSection from "@/components/PartnersSection/PartnersSection";
 import Portfolio from "@/components/Portfolio/Portfolio";
 import ServicesSection from "@/components/ServicesSection/ServicesSection";
 import { HomeContextProvider } from "@/contexts/HomeContext";
+import { HeadProps } from "@/interfaces/common.interface";
 import { IHomeData } from "@/interfaces/home.interface";
 import { fetchData, fetchMainData } from "@/utils/fetch.utils";
 import { GetStaticProps } from "next";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-interface HomePageProps {
+interface HomePageProps extends HeadProps {
   indexData: IHomeData;
 }
 
@@ -48,7 +50,8 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async (ctx) => {
     props: {
       ...translations,
       indexData,
-      headData
+      headData,
+      meta: 'index'
     },
     revalidate: 100
   };

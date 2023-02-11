@@ -29,7 +29,8 @@ export const getStaticProps: GetStaticProps<VacanciesPageProps> = async (ctx) =>
     props: {
       ...translations,
       vacancies,
-      headData
+      headData,
+      meta: 'vacancies'
     },
     revalidate: 100
   };

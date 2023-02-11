@@ -1,11 +1,13 @@
 import Layout from "@/components/Common/Layout";
+import PageHead from "@/components/Common/PageHead";
 import PortfolioContainer from "@/components/PortfolioContainer/PortfolioContainer";
+import { HeadProps } from "@/interfaces/common.interface";
 import { IProject, IProjectType } from "@/interfaces/project.interface";
 import { fetchData, fetchMainData } from "@/utils/fetch.utils";
 import { GetStaticProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-interface PortfolioPageProps {
+interface PortfolioPageProps extends HeadProps {
   projects: IProject[];
   projectCategories: IProjectType[];
 }
@@ -40,7 +42,8 @@ export const getStaticProps: GetStaticProps<PortfolioPageProps> = async (ctx) =>
       ...translations,
       projects,
       projectCategories,
-      headData
+      headData,
+      meta: 'portfolio'
     },
     revalidate: 100,
   };

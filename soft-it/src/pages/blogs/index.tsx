@@ -35,7 +35,8 @@ export const getStaticProps: GetStaticProps<BlogPageProps> = async (ctx) => {
       ...translations,
       headData,
       blogs,
-      blogCategories
+      blogCategories,
+      meta: 'blog'
     },
     revalidate: 100,
   };

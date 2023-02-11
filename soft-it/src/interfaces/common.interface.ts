@@ -43,3 +43,12 @@ export interface IHeadData {
     menus: IFooterItem[];
   };
 }
+
+export type PageMeta = string | {
+  title: string;
+  description: string;
+}
+
+export interface HeadProps {
+  headData: IHeadData;
+}

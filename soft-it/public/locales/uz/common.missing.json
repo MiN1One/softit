@@ -34,5 +34,11 @@
   "sendResume": "sendResume",
   "all": "all",
   "blog": "blog",
-  "exploreUs": "exploreUs"
+  "exploreUs": "exploreUs",
+  "meta": {
+    "portfolio": {
+      "title": "meta.portfolio.title",
+      "description": "meta.portfolio.description"
+    }
+  }
 }

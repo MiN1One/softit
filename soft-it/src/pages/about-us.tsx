@@ -31,6 +31,7 @@ export const getStaticProps: GetStaticProps<AboutPageProps> = async (ctx) => {
       ...translations,
       headData,
       about: about?.[0],
+      meta: 'about'
     },
     revalidate: 200,
   };
