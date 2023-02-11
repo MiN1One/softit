@@ -16,6 +16,7 @@ const Hero: FC = () => {
     <section className={classes.hero}>
       <div className={classes.textContainer}>
         <Spotlight 
+          data-label={t('exploreUs')} 
           className={classNames(
             classes.heading, 
             "heading heading--xlg"
