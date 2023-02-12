@@ -1,6 +1,6 @@
 import { IVacancy, IVacancyInfoItem } from "@/interfaces/vacancies.interface";
 import classNames from "classnames";
-import { ChangeEvent, FC, FormEvent, memo, useCallback, useState } from "react";
+import { ChangeEvent, FC, FormEvent, memo, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
 import CustomIcon from "../Common/CustomIcon";
 import Input, { CustomSelect, FileInput, PhoneInput } from "../Common/Input";
@@ -30,6 +30,13 @@ const SingleVacancy: FC<SingleVacancyProps> = (props) => {
   const [file, setFile] = useState<File | null>(null);
   const { t } = useTranslation();
   const [form, setForm] = useState<FormType>(defaultForm);
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    if (!showModal) {
+      setSuccess(false);
+    }
+  }, [showModal]);
 
   const getListItems = useCallback((list: IVacancyInfoItem[]) => {
     return (
@@ -70,19 +77,21 @@ const SingleVacancy: FC<SingleVacancyProps> = (props) => {
     async (e: FormEvent<HTMLFormElement>) => {
       try {
         e.preventDefault();
-        const result = await fetchData('/resume', activeLang, {
+        const formData = new FormData();
+        formData.append('full_name', form.full_name);
+        formData.append('vacancy_id', vacancy.id.toString());
+        formData.append('phone_number', phoneCode + form.phone_number);
+        formData.append('cv_file', file as any);
+
+        const result = await fetchData('/resumes/', activeLang, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            full_name: form.full_name,
-            vacancy_id: +form.vacancy_id,
-            phone_number: phoneCode + form.phone_number
-          }),
+          body: formData,
         });
+
         if (result) {
+          setSuccess(true);
           setForm(defaultForm);
+          setFile(null);
         }
       } catch (er) {
         console.log('Error submiting form', er);
@@ -128,6 +137,11 @@ const SingleVacancy: FC<SingleVacancyProps> = (props) => {
             label={t('input.cv')!}
             placeholder={t('input.enter.cv')!}
           />
+          {success && (
+            <p className="text text--success">
+              {t('success')}
+            </p>
+          )}
           <button 
             title={t('input.enter.cv')!} 
             type="submit"

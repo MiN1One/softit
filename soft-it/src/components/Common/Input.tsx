@@ -207,6 +207,7 @@ const Input: FC<InputProps & GeneralInputProps> = (props) => {
     >
       <input
         {...restProps}
+        value={value}
         onChange={typeof onChange === 'function' ? onChange : undefined}
         readOnly={props.readOnly || (!props.onChange && Boolean(props.value))}
         className="input-group__input"

@@ -13,12 +13,13 @@ const Contact: FC = () => {
   const { activeLang } = useGlobalContext();
   const [name, setName] = useState('');
   const { t } = useTranslation();
+  const [success, setSuccess] = useState(false);
 
   const onSubmitRequest = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       try {
         e.preventDefault();
-        const result = await fetchData('/applications', activeLang, {
+        const result = await fetchData('/applications/', activeLang, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -31,6 +32,7 @@ const Contact: FC = () => {
         if (result) {
           setPhone('');
           setName('');
+          setSuccess(true);
         }
       } catch (er) {
         console.log('Submit error', er);
@@ -70,6 +72,11 @@ const Contact: FC = () => {
                 placeholder="+998"
               />
             </div>
+            {success && (
+              <p className="text text--success">
+                {t('success')}
+              </p>
+            )}
             <button
               title={t('submitTheForm')!}
               type="submit"

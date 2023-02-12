@@ -27,6 +27,7 @@ const SingleService: FC<SingleServiceProps> = () => {
   const [form, setForm] = useState<IForm>(defaultForm);
   const { t } = useTranslation();
   const { activeLang } = useGlobalContext();
+  const [success, setSuccess] = useState(false);
   const [projectTypes, setProjectTypes] = useState<IProjectType[]>([]);
 
   const onFormChange = useCallback((key: keyof IForm, val: any) => {
@@ -52,7 +53,7 @@ const SingleService: FC<SingleServiceProps> = () => {
   const onSubmitForm = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      const result = await fetchData('/project-applications', activeLang, {
+      const result = await fetchData('/project-applications/', activeLang, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,6 +66,7 @@ const SingleService: FC<SingleServiceProps> = () => {
         })
       });
       if (result) {
+        setSuccess(true);
         setForm(defaultForm);
       }
     }, [form]
@@ -126,6 +128,11 @@ const SingleService: FC<SingleServiceProps> = () => {
                   placeholder={t('input.projectDescription')!}
                 />
               </div>
+              {success && (
+                <p className="text text--success">
+                  {t('success')}
+                </p>
+              )}
               <div className={classes.formFooter}>
                 <button className="btn btn--colored btn--rocket btn--outline" type="submit">
                   {t('submit')}

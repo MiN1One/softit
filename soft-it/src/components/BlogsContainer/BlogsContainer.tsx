@@ -5,6 +5,8 @@ import Tags from "../Tags/Tags";
 import classes from './BlogsContainer.module.scss';
 import BlogCard from "../BlogCard/BlogCard";
 import { useTranslation } from "next-i18next";
+import { fetchData } from "@/utils/fetch.utils";
+import { useGlobalContext } from "@/contexts/GlobalContext";
 
 interface BlogsContainerProps {
   blogs: IBlog[];
@@ -14,6 +16,7 @@ interface BlogsContainerProps {
 const BlogsContainer: FC<BlogsContainerProps> = (props) => {
   const { t } = useTranslation();
   const { blogs, blogCategories, } = props;
+  const { activeLang } = useGlobalContext();
 
   const allBlogsType = t('all');
   const [activeTag, setActiveTag] = useState<string>(allBlogsType);
@@ -25,12 +28,17 @@ const BlogsContainer: FC<BlogsContainerProps> = (props) => {
     if (activeTag === allBlogsType) {
       setFilteredBlogs(blogs);
     } else {
-      const filteredBlogs = blogs.filter(({ blog_category_title }) => (
-        blog_category_title === activeTag
+      const activeBlogCategory = blogCategories.find(({ title }) => (
+        activeTag === title
       ));
-      setFilteredBlogs(filteredBlogs);
+      if (activeBlogCategory) {
+        fetchData(
+          `/blogs?blog_category_id=${activeBlogCategory?.id}`,
+          activeLang
+        ).then(setFilteredBlogs);
+      }
     }
-  }, [activeTag, tagItems, allBlogsType]);
+  }, [activeTag, allBlogsType, activeLang]);
 
   const blogEls = filteredBlogs.map((blog) => {
     return (

@@ -39,6 +39,17 @@
     "portfolio": {
       "title": "meta.portfolio.title",
       "description": "meta.portfolio.description"
+    },
+    "index": {
+      "title": "meta.index.title",
+      "description": "meta.index.description"
+    },
+    "services": {
+      "title": "meta.services.title",
+      "description": "meta.services.description"
     }
-  }
+  },
+  "ourServices": "ourServices",
+  "success": "success",
+  "services": "services"
 }
