@@ -32,6 +32,9 @@ const Navigation: FC = () => {
      );
   });
 
+  const phoneCode = headData.headerData.company_info.phone_number.slice(0, 6);
+  const phoneNumber = headData.headerData.company_info.phone_number.substring(6);
+
   return (
     <header className={classes.nav}>
       <div className="container">
@@ -47,8 +50,12 @@ const Navigation: FC = () => {
               href={`tel:${headerData.company_info.phone_number}`}
               title="Our Phone Number" 
               className={classes.phone}
-              dangerouslySetInnerHTML={{ __html: headerData.company_info.phone_number }}
-            />
+            >
+              {phoneCode}
+              <span className="text--highlight">
+                {phoneNumber}
+              </span>
+            </a>
             <Dropdown
               label={(
                 <span className={classNames(classes.language, "text--upc")}>

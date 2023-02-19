@@ -35,7 +35,7 @@ section:not(.page-section) {
   &--primary,
   &--outline,
   &--colored {
-    border: 1px solid rgba(#fff, .8);
+    border: 1px solid #fff;
     border-radius: .75rem;
     padding: .75rem;
     transition: all .3s ease;
@@ -90,6 +90,36 @@ section:not(.page-section) {
     &:focus {
       background: var(--color-dark);
       border-color: var(--color-dark);
+    }
+  }
+
+  &--rocket {
+    svg {
+      flex-shrink: 0;
+      transition: transform .3s ease;
+
+      &:last-child { transform: translateX(-100%); }
+    }
+    
+    span {
+      flex-direction: column;
+      width: 2.25rem;
+      height: 2.25rem;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      overflow: hidden;
+      row-gap: 1rem;
+    }
+
+    &:hover {
+      svg:first-child {
+        transform: translate(100%, calc(-100% - 1rem));
+      }
+
+      svg:last-child {
+        transform: translate(0, calc(-100% - 1rem));
+      }
     }
   }
 

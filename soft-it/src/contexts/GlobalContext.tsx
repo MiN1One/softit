@@ -1,7 +1,7 @@
 import useMedia from "@/hooks/useMedia";
 import { IHeadData, PageMeta } from "@/interfaces/common.interface";
 import { useRouter } from "next/router";
-import { createContext, FC, useCallback, useContext, useState } from "react";
+import { createContext, FC, useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
 import { StateSetter } from "@/interfaces/utils.interface";
 import PageHead from "@/components/Common/PageHead";
@@ -38,6 +38,10 @@ export const GlobalContextProvider: FC<GlobalContextProviderProps> =
     const activeLang = router.locale || 'uz';
     const [headData, setHeadData] = useState<IHeadData>(headDataProp || {});
     const { i18n, t } = useTranslation();
+
+    useEffect(() => {
+      window.scrollTo({ top: 0 });
+    }, []);
     
     const changeLanguage = useCallback(async (lang: string) => {
       if (activeLang === lang) return;

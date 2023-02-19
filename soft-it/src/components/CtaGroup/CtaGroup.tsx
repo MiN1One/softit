@@ -3,7 +3,7 @@ import classes from './CtaGroup.module.scss';
 import illustration from '@assets/images/5.png';
 import classNames from "classnames";
 import CustomIcon from "../Common/CustomIcon";
-import { Trans, useTranslation } from "next-i18next";
+import { useTranslation } from "next-i18next";
 import { useGlobalContext } from "@/contexts/GlobalContext";
 
 const CtaGroup: FC = () => {
@@ -15,9 +15,13 @@ const CtaGroup: FC = () => {
       <div className="container">
         <div className={classes.content}>
           <div className={classes.groupLeft}>
-            <h2 className={classNames("heading heading--2", classes.heading)}>
-              <Trans i18nKey="ctaTitle" components={[<br />]} />
-            </h2>
+            <h2 
+              className={classNames(
+                "heading heading--2", 
+                classes.heading
+              )}
+              dangerouslySetInnerHTML={{ __html: t('ctaTitle') }}
+            />
             <div className={classNames(
               classes.subtitle, 
               "text--lg text--sub text"

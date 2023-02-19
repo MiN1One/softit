@@ -21,15 +21,7 @@
     align-items: center;
     max-width: 40rem;
     position: relative;
-
-    img {
-      width: 3rem;
-      height: 3rem;
-      position: absolute;
-      top: 55%;
-      right: 9.5rem;
-    }
-
+    
     @include respond('mid-low') {
       max-width: 60rem;
     }

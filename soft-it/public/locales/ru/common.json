@@ -1,4 +1,77 @@
 {
   "designed": "Designed By",
-  "about": "О нас"
+  "about": "About Us",
+  "viewMore": "View More",
+  "allProjects": "All Projects",
+  "partners": "Our Partners",
+  "portfolio": "Portfolio",
+  "contactTitle": "Do you have a project?",
+  "contactSubtitle": "We have a solution",
+  "submit": "Submit",
+  "ourPortfolio": "Our portfolio",
+  "callUs": "Call us",
+  "ourServices": "Our Services",
+  "forAny": "For any business",
+  "ctaTitle": "We offer best digital<0 /> solutions for your business",
+  "submitTheForm": "Submit the form",
+  "bannerTitle": "You can be part of<0 /> our team",
+  "bannerSubtitle": "Want to grow with us? Then join us.",
+  "teamPhotos": "Photos from our team",
+  "all": "All",
+  "top7": "Top 7",
+  "sendResume": "Send resume",
+  "success": "Your request has successfully been recorded, we will get back to you very soon.",
+  "vacancy": "Vacancy",
+  "requirements": "Requirements",
+  "blog": "Blog",
+  "tasks": "Tasks",
+  "conditions": "Conditions",
+  "services": "Services",
+  "exploreUs": "Explore Us",
+  "aboutPhotoDescription": "All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.",
+  "contactWarning": "After you fill in this basic information, our responsible staff will contact you.",
+  "projectType": "Type of project",
+  "meta": {
+    "index": {
+      "title": "Soft IT",
+      "description": "This is meta description for home page"
+    },
+    "about": {
+      "title": "About Us",
+      "description": "This is meta description for about us page"
+    },
+    "portfolio": {
+      "title": "Our portfolio",
+      "description": "This is meta description for portfolio page"
+    },
+    "services": {
+      "title": "Our Services",
+      "description": "This is meta description for services page"
+    },
+    "service": {
+      "title": "Submit your project",
+      "description": "Submit your project we will respond you back in a bit"
+    },
+    "vacancies": {
+      "title": "Open vacancies",
+      "description": "This is meta description for vacancies page"
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "This is meta description for blog page"
+    }
+  },
+  "input": {
+    "phone": "Your phone number",
+    "name": "Your name",
+    "company": "Company",
+    "cv": "Your CV",
+    "projectDescription": "Write brief description of the project",
+    "enter": {
+      "cv": "Upload you CV",
+      "name": "Enter your name",
+      "phone": "Enter your number",
+      "company": "Enter your company"
+    }
+  }
 }

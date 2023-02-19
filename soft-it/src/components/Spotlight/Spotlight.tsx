@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { createElement, FC, memo, useCallback, useRef, useState } from "react";
+import { createElement, FC, memo, useCallback, useEffect, useRef, useState } from "react";
 import classes from './Spotlight.module.scss';
 
 interface SpotlightProps {
@@ -14,6 +14,13 @@ const Spotlight: FC<SpotlightProps> = (props) => {
   const { element = 'h1', children, ...restProps } = props;
   const elementRef = useRef<any>();
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [mouseFocus, setMouseFocus] = useState(false);
+
+  useEffect(() => {
+    if (!mouseFocus) {
+      setPosition({ x: 0, y: 0 });
+    }
+  }, [mouseFocus]);
 
   const onMouseMove = useCallback((event: any) => {
     if (event) {
@@ -27,16 +34,22 @@ const Spotlight: FC<SpotlightProps> = (props) => {
       x: spotlightX,
       y: spotlightY
     });
-  }, []);
+  }, [mouseFocus]);
 
   return createElement(
     element, 
     {
       ...restProps,
       onMouseMove,
-      style: {
-        backgroundPosition: `${position.x}px ${position.y}px`,
-      },
+      onMouseEnter: () => setMouseFocus(true),
+      onMouseLeave: () => setMouseFocus(false), 
+      style: 
+        mouseFocus 
+          ? {
+            backgroundPosition: `${position.x}px ${position.y}px`,
+            backgroundImage: 'radial-gradient(closest-side, rgba(255,255,255,.2) 30%, transparent 70%)' 
+          }
+          : undefined,
       ref: elementRef,
       className: classNames(restProps.className, classes.spotlight),
     },

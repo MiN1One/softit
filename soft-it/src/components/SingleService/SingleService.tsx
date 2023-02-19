@@ -136,7 +136,10 @@ const SingleService: FC<SingleServiceProps> = () => {
               <div className={classes.formFooter}>
                 <button className="btn btn--colored btn--rocket btn--outline" type="submit">
                   {t('submit')}
-                  <CustomIcon name="rocket" />
+                  <span>
+                    <CustomIcon name="rocket" />
+                    <CustomIcon name="rocket" />
+                  </span>
                 </button>
               </div>
             </form>

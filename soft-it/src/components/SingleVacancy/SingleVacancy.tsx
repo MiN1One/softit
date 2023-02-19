@@ -145,10 +145,13 @@ const SingleVacancy: FC<SingleVacancyProps> = (props) => {
           <button 
             title={t('input.enter.cv')!} 
             type="submit"
-            className="btn btn--colored"
+            className="btn btn--colored btn--rocket"
           >
             {t('submit')}
-            <CustomIcon name="rocket" />
+            <span>
+              <CustomIcon name="rocket" />
+              <CustomIcon name="rocket" />
+            </span>
           </button>
         </form>
       </Modal>
@@ -195,7 +198,7 @@ const SingleVacancy: FC<SingleVacancyProps> = (props) => {
           </div>
           <button 
             onClick={() => setShowModal(true)} 
-            className="btn btn--colored btn--outline"
+            className="btn btn--colored btn--outline btn--arrow"
           >
             <CustomIcon name="arrow" />
             {t('sendResume')}

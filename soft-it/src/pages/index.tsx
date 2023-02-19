@@ -1,7 +1,6 @@
 import AboutSection from "@/components/AboutSection/AboutSection";
 import BannerHiring from "@/components/BannerHiring/BannerHiring";
 import Layout from "@/components/Common/Layout";
-import PageHead from "@/components/Common/PageHead";
 import Contact from "@/components/Contact/Contact";
 import CtaGroup from "@/components/CtaGroup/CtaGroup";
 import Hero from "@/components/Hero/Hero";

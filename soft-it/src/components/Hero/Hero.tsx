@@ -5,6 +5,7 @@ import Moon from "../Common/Moon";
 import Spotlight from "../Spotlight/Spotlight";
 import classNames from "classnames";
 import { useTranslation } from "next-i18next";
+import CustomIcon from "../Common/CustomIcon";
 
 const Hero: FC = () => {
   const { t } = useTranslation();
@@ -15,13 +16,16 @@ const Hero: FC = () => {
   return (
     <section className={classes.hero}>
       <div className={classes.textContainer}>
-        <Spotlight 
-          data-label={t('exploreUs')} 
-          className={classNames(
-            classes.heading, 
-            "heading heading--xlg"
-          )}
-        >
+        <span className={classNames(
+          classes.headingOverlay, 
+          "heading heading--xlg"
+        )}>
+          {t('exploreUs')}
+        </span>
+        <Spotlight className={classNames(
+          classes.heading, 
+          "heading heading--xlg"
+        )}>
           {t('exploreUs')}
         </Spotlight>
       </div>
@@ -33,6 +37,10 @@ const Hero: FC = () => {
       >
         <Moon onLoad={onMoonLoad} />
       </figure>
+      <div className={classes.hint}>
+        <CustomIcon name="mouse" />
+        {t('scrollDown')}
+      </div>
       <figure className={classes.floatingImage}>
         <img
           src={mountains.src}

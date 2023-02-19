@@ -1,14 +1,13 @@
 import { FC, memo } from "react";
 import classes from './BannerHiring.module.scss';
-import emoji from '@assets/images/Winking Face.png';
 import classNames from "classnames";
 import Link from "next/link";
 import { useHomeContext } from "@/contexts/HomeContext";
-import { Trans, useTranslation } from "next-i18next";
+import { useTranslation } from "next-i18next";
 
 const BannerHiring: FC = () => {
   const { data } = useHomeContext();
-  const { t } = useTranslation();
+  const { t } = useTranslation(['common']);
 
   const hiringTagEls = data.hot_vacancies.map((item, index) => {
     return (
@@ -29,15 +28,10 @@ const BannerHiring: FC = () => {
       <div className="container">
         <div className={classes.content}>
           <div>
-            <h4 className={classNames(classes.heading, "heading heading--3")}>
-              <Trans i18nKey="bannerTitle" components={[<br />]} />
-              <img 
-                alt="Emoji"
-                src={emoji.src}
-                width="20"
-                height="20"
-              />
-            </h4>
+            <h4 
+              className={classNames(classes.heading, "heading heading--3")}
+              dangerouslySetInnerHTML={{__html: t('bannerTitle') }}
+            />
             <p className="text text--sub">
               {t('bannerSubtitle')}
             </p>
